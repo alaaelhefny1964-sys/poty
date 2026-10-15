@@ -1,0 +1,2074 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مستر علاء الحفنى - النظام الاحترافي</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+:root{--primary:#0f172a;--secondary:#1e293b;--accent:#f59e0b;--accent-light:#fbbf24;--success:#10b981;--danger:#ef4444;--info:#3b82f6;--glass-border:rgba(255,255,255,.18);--shadow:0 25px 50px -12px rgba(0,0,0,.25);--radius:24px;--transition:all .4s cubic-bezier(.4,0,.2,1)}
+body{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);min-height:100vh;color:#f8fafc}
+/* ===== إصلاح نهائي للقوائم المنسدلة (كلها غامقة وواضحة) ===== */
+select{color-scheme:dark;background-color:#1e293b;color:#ffffff}
+select option{background:#1e293b!important;color:#ffffff!important;font-weight:700}
+select optgroup{background:#1e293b!important;color:#fbbf24!important}
+input[type="date"],input[type="month"]{color-scheme:dark}
+/* LOGIN */
+.login-page{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;position:relative;overflow:hidden}
+.login-page::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(245,158,11,.08) 0%,transparent 70%);top:-200px;right:-200px;border-radius:50%}
+.login-box{background:rgba(255,255,255,.05);backdrop-filter:blur(20px);border:1px solid var(--glass-border);padding:50px 45px;border-radius:var(--radius);width:100%;max-width:440px;animation:floatIn .8s ease;position:relative;z-index:1;box-shadow:var(--shadow)}
+@keyframes floatIn{from{opacity:0;transform:translateY(30px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.login-box .logo{text-align:center;margin-bottom:15px}
+.login-box .icon-wrapper{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent-light));padding:18px;border-radius:20px;box-shadow:0 8px 32px rgba(245,158,11,.3)}
+.login-box .icon-wrapper i{font-size:40px;color:var(--primary)}
+.login-box h1{text-align:center;font-size:28px;font-weight:900;background:linear-gradient(135deg,#fff 30%,var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px}
+.login-box .subtitle{text-align:center;color:rgba(255,255,255,.5);font-size:14px;margin-bottom:30px}
+.login-box .form-group{margin-bottom:20px}
+.login-box label{display:block;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7);font-size:14px}
+.login-box select,.login-box input{width:100%;padding:14px 18px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);border-radius:14px;font-size:15px;color:#fff;transition:var(--transition)}
+.login-box select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f59e0b' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 15px center;padding-left:40px}
+.login-box select:focus,.login-box input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 4px rgba(245,158,11,.15)}
+.btn-login{width:100%;padding:16px;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:var(--primary);border:none;border-radius:14px;font-size:18px;font-weight:800;cursor:pointer;transition:var(--transition);margin-top:10px;font-family:Cairo}
+.btn-login:hover{transform:scale(1.02);box-shadow:0 10px 40px rgba(245,158,11,.4)}
+.error-msg{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5;padding:12px 16px;border-radius:12px;text-align:center;margin-top:15px;display:none;font-weight:600}
+.login-help{text-align:center;margin-top:20px;font-size:13px;color:rgba(255,255,255,.4)}
+.login-help strong{color:var(--accent-light)}
+/* APP */
+.app-container{display:none}
+.sidebar{width:280px;background:rgba(15,23,42,.92);backdrop-filter:blur(20px);border-left:1px solid var(--glass-border);padding:20px 0 60px;height:100vh;position:fixed;right:0;top:0;overflow-y:auto;transition:var(--transition);z-index:1000}
+.sidebar-brand{text-align:center;padding:20px 15px 25px;border-bottom:1px solid var(--glass-border);margin-bottom:20px}
+.brand-icon{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent-light));padding:12px;border-radius:16px;margin-bottom:10px}
+.brand-icon i{font-size:28px;color:var(--primary)}
+.sidebar-brand h2{font-size:22px;font-weight:900;background:linear-gradient(135deg,#fff 30%,var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sidebar-brand .subtitle{font-size:12px;opacity:.5;margin-top:5px}
+.sidebar-menu{list-style:none;padding:0 12px}
+.sidebar-menu li{margin-bottom:4px}
+.sidebar-menu a{display:flex;align-items:center;gap:12px;padding:12px 16px;color:rgba(255,255,255,.6);text-decoration:none;border-radius:14px;transition:var(--transition);font-size:14px;font-weight:600;cursor:pointer;position:relative}
+.sidebar-menu a:hover{background:rgba(255,255,255,.06);color:#fff}
+.sidebar-menu a.active{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(245,158,11,.05));color:var(--accent-light);border:1px solid rgba(245,158,11,.2)}
+.sidebar-menu a i{width:22px;font-size:16px;text-align:center}
+.sidebar-menu .badge{background:var(--accent);color:var(--primary);padding:2px 10px;border-radius:20px;font-size:11px;font-weight:800;margin-right:auto}
+.sidebar-menu .badge.hide{display:none}
+.sidebar-footer{position:absolute;bottom:20px;width:100%;text-align:center;font-size:12px;opacity:.4}
+.main-content{margin-right:280px;flex:1;padding:24px;min-height:100vh}
+.topbar{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);border:1px solid var(--glass-border);padding:16px 24px;border-radius:var(--radius);display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;box-shadow:var(--shadow);flex-wrap:wrap;gap:12px}
+.user-info{display:flex;align-items:center;gap:15px}
+.avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px}
+.user-name{font-weight:700;font-size:16px}
+.user-role{font-size:13px;color:rgba(255,255,255,.5)}
+.role-badge{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.2);color:var(--accent-light);padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700}
+.topbar-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar-date{font-size:13px;color:rgba(255,255,255,.55);font-weight:600}
+.save-indicator{font-size:11.5px;color:rgba(255,255,255,.5);font-weight:700;white-space:nowrap;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:6px 12px;border-radius:20px}
+.save-indicator i{color:#34d399}
+.btn-bell,.btn-key{position:relative;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);color:var(--accent-light);font-size:18px;cursor:pointer;transition:var(--transition)}
+.btn-bell:hover,.btn-key:hover{background:rgba(245,158,11,.15)}
+.bell-dot{position:absolute;top:5px;left:5px;width:11px;height:11px;background:var(--danger);border-radius:50%;border:2px solid var(--primary);animation:pulse 2s infinite;display:none}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+.btn-logout{padding:10px 22px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.2);color:#fca5a5;border-radius:12px;cursor:pointer;font-weight:700;transition:var(--transition);font-family:Cairo}
+.btn-logout:hover{background:rgba(239,68,68,.25)}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px;margin-bottom:24px}
+.stat-card{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);border:1px solid var(--glass-border);padding:20px;border-radius:var(--radius);transition:var(--transition);text-align:center;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));opacity:0;transition:var(--transition)}
+.stat-card:hover::before{opacity:1}
+.stat-card:hover{transform:translateY(-4px)}
+.stat-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 10px;background:rgba(245,158,11,.1);color:var(--accent-light)}
+.stat-number{font-size:26px;font-weight:900;background:linear-gradient(135deg,#fff 30%,var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{color:rgba(255,255,255,.5);font-size:13px;margin-top:4px}
+/* SECTIONS */
+.section{display:none;animation:fadeSlide .6s ease}
+.section.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:15px}
+.section-header h3{font-size:22px;font-weight:800;background:linear-gradient(135deg,#fff 30%,var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-header h3 i{-webkit-text-fill-color:var(--accent-light);margin-left:10px}
+.header-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+/* BUTTONS */
+.btn{padding:10px 24px;border:none;border-radius:14px;font-weight:700;font-size:14px;cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;gap:8px;font-family:Cairo}
+.btn:hover{transform:scale(1.03)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-light));color:var(--primary)}
+.btn-success{background:linear-gradient(135deg,var(--success),#34d399);color:#fff}
+.btn-danger{background:linear-gradient(135deg,var(--danger),#f87171);color:#fff}
+.btn-accent{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.2);color:var(--accent-light)}
+.btn-info{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.2);color:#93c5fd}
+.btn-outline{background:transparent;border:1px solid var(--glass-border);color:rgba(255,255,255,.7)}
+.btn-sm{padding:6px 14px;font-size:12px;border-radius:10px}
+/* QUICK KEYS */
+.quick-keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}
+.qkey{background:rgba(255,255,255,.04);border:1px solid var(--glass-border);border-radius:18px;padding:18px 14px;text-align:center;cursor:pointer;transition:var(--transition)}
+.qkey:hover{transform:translateY(-4px);border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.08)}
+.qkey i{font-size:26px;color:var(--accent-light);margin-bottom:8px;display:block}
+.qkey b{font-size:13.5px;display:block}
+.qkey small{color:rgba(255,255,255,.45);font-size:11px}
+/* TABLES */
+.table-container{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;overflow-x:auto;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse}
+th{background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);padding:13px 10px;text-align:center;font-weight:700;font-size:13.5px;border-bottom:1px solid var(--glass-border)}
+td{padding:12px 10px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04);font-size:13.5px}
+tr:hover td{background:rgba(255,255,255,.04)}
+.status-badge{padding:4px 14px;border-radius:20px;font-weight:700;font-size:12px;display:inline-block}
+.status-active{background:rgba(16,185,129,.15);color:#34d399}
+.status-suspended{background:rgba(245,158,11,.15);color:#fbbf24}
+.status-deleted{background:rgba(239,68,68,.15);color:#f87171}
+.status-present{background:rgba(16,185,129,.15);color:#34d399}
+.status-absent{background:rgba(239,68,68,.15);color:#f87171}
+.pt-sub{background:rgba(245,158,11,.15);color:#fbbf24}
+.pt-ses{background:rgba(59,130,246,.15);color:#93c5fd}
+.pt-book{background:rgba(139,92,246,.15);color:#c4b5fd}
+.t-green{color:#34d399}.t-red{color:#f87171}.t-gold{color:var(--accent-light)}.t-blue{color:#93c5fd}
+.mono{font-family:monospace;direction:ltr;display:inline-block}
+.empty{text-align:center;color:rgba(255,255,255,.3);padding:24px;font-size:14px}
+/* CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+.glass-card{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px;transition:var(--transition);box-shadow:var(--shadow)}
+.glass-card:hover{transform:translateY(-4px);border-color:rgba(245,158,11,.2)}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--glass-border);flex-wrap:wrap;gap:8px}
+.card-header h4{font-size:16px;font-weight:700;color:var(--accent-light)}
+.dg-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:12.5px;color:rgba(255,255,255,.6);margin-bottom:6px}
+.progress{height:8px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden;margin:12px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-light));border-radius:10px}
+.dash-two{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;margin-top:4px}
+.dash-two2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.revenue-chart{display:flex;align-items:flex-end;gap:12px;height:190px;padding:34px 6px 40px;position:relative}
+.rc-bar{flex:1;background:linear-gradient(180deg,var(--accent-light),var(--accent));border-radius:10px 10px 4px 4px;position:relative;min-height:6px}
+.rc-val{position:absolute;top:-26px;width:100%;text-align:center;font-size:11.5px;font-weight:800;color:var(--accent-light)}
+.rc-lbl{position:absolute;bottom:-30px;width:100%;text-align:center;font-size:11px;color:rgba(255,255,255,.5)}
+.mini-booking{display:flex;align-items:center;gap:12px;padding:10px 12px;background:rgba(255,255,255,.04);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:var(--transition)}
+.mini-booking:hover{background:rgba(255,255,255,.08)}
+.mini-booking i{color:var(--accent-light)}
+.mini-booking div{display:flex;flex-direction:column}
+.mini-booking div span{font-size:12px;color:rgba(255,255,255,.5)}
+.mini-booking>.status-badge{margin-right:auto}
+.books-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.books-mini>div{background:rgba(255,255,255,.05);border-radius:14px;padding:14px;text-align:center}
+.books-mini b{display:block;font-size:19px;color:var(--accent-light)}
+.books-mini span{font-size:11.5px;color:rgba(255,255,255,.5)}
+/* GROUP DETAILS */
+.group-full-details{background:rgba(255,255,255,.04);border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+.group-title{font-size:21px;font-weight:800;color:var(--accent-light);margin-bottom:10px}
+.g-stage{font-size:13px;color:rgba(255,255,255,.5);font-weight:400}
+.group-meta{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:20px;color:rgba(255,255,255,.5);font-size:13.5px}
+.student-row-detail{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(255,255,255,.04);border-radius:12px;margin-bottom:8px;flex-wrap:wrap;gap:10px}
+.student-row-detail:hover{background:rgba(255,255,255,.08)}
+.sd-main{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.student-name{font-weight:700;font-size:15px}
+.sd-code{font-size:12px;color:rgba(255,255,255,.4);font-family:monospace}
+.student-stats{display:flex;gap:13px;font-size:13px;flex-wrap:wrap}
+.student-stats span{display:flex;align-items:center;gap:4px}
+.student-actions{display:flex;gap:6px}
+.report-btn{padding:6px 14px;border-radius:10px;border:none;font-weight:700;font-size:12px;cursor:pointer;transition:var(--transition);font-family:Cairo}
+.report-btn:hover{transform:scale(1.05)}
+.report-btn-student{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.2)}
+/* BOOKING ADMIN */
+.booking-link-box{background:rgba(0,0,0,.3);border-radius:16px;padding:20px;text-align:center;border:1px dashed rgba(245,158,11,.3);margin:10px 0}
+.link-text{font-size:14px;font-weight:700;color:var(--accent-light);font-family:monospace;direction:ltr;background:rgba(0,0,0,.3);padding:12px 20px;border-radius:12px;display:inline-block;margin:10px 0;word-break:break-all}
+.qr-sim{font-size:60px;color:var(--accent-light);opacity:.6;margin:10px 0}
+.booking-request{display:flex;justify-content:space-between;gap:14px;padding:16px;background:rgba(255,255,255,.04);border-radius:14px;margin-bottom:10px;border-right:4px solid #f59e0b;flex-wrap:wrap;transition:var(--transition)}
+.booking-request:hover{background:rgba(255,255,255,.07)}
+.booking-request.approved{border-right-color:var(--success)}
+.booking-request.rejected{border-right-color:var(--danger);opacity:.6}
+.br-name{font-weight:800;font-size:16px;margin-bottom:6px}
+.br-name i{color:var(--accent-light);margin-left:6px}
+.br-meta{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:rgba(255,255,255,.55)}
+.br-side{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.br-actions{display:flex;gap:8px;flex-wrap:wrap}
+.br-notes{margin-top:8px;font-size:12.5px;color:rgba(255,255,255,.55);background:rgba(0,0,0,.2);padding:8px 12px;border-radius:10px}
+.badge-count{background:var(--danger);color:#fff;min-width:22px;height:22px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;padding:0 6px}
+/* BOOKS / CODES */
+.book-meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.55);margin-bottom:12px}
+.book-actions{display:flex;gap:8px;flex-wrap:wrap}
+.code-card .barcode-wrap{background:#fff;border-radius:12px;padding:10px;margin:10px 0;text-align:center}
+.code-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px;flex-wrap:wrap}
+.code-foot{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:rgba(255,255,255,.5);flex-wrap:wrap;gap:8px}
+/* TABS */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{padding:10px 22px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--glass-border);color:rgba(255,255,255,.6);font-weight:700;font-size:13.5px;cursor:pointer;transition:var(--transition);font-family:Cairo}
+.tab:hover{color:#fff}
+.tab.active{background:linear-gradient(135deg,var(--accent),var(--accent-light));color:var(--primary);border-color:transparent}
+/* FILTER CHIPS */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 18px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid var(--glass-border);color:rgba(255,255,255,.65);font-weight:700;font-size:13px;cursor:pointer;font-family:Cairo;transition:var(--transition)}
+.chip:hover{color:#fff}
+.chip.active{background:linear-gradient(135deg,var(--accent),var(--accent-light));color:var(--primary);border-color:transparent}
+.range-box{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.range-box span{color:rgba(255,255,255,.5);font-weight:700;font-size:13px}
+.filter-date{padding:9px 14px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);border-radius:12px;color:#fff;font-family:Cairo;font-size:13px;color-scheme:dark}
+.filter-date:focus{border-color:var(--accent);outline:none}
+.filter-summary{font-size:14px;font-weight:700;color:rgba(255,255,255,.7);padding:12px 16px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:12px;margin-bottom:14px}
+.filter-summary b{color:var(--accent-light)}
+/* ATTENDANCE */
+.att-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:12px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.att-name{font-weight:600;font-size:14px}
+.att-btn{padding:6px 18px;border-radius:10px;border:1px solid var(--glass-border);background:transparent;color:rgba(255,255,255,.55);font-weight:700;font-size:12px;cursor:pointer;font-family:Cairo;transition:var(--transition)}
+.att-btn.on-p{background:rgba(16,185,129,.2);border-color:rgba(16,185,129,.4);color:#34d399}
+.att-btn.on-a{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4);color:#f87171}
+.scan-box{background:rgba(0,0,0,.35);border:2px dashed rgba(245,158,11,.35);border-radius:20px;padding:18px;text-align:center}
+#cameraReader,#cameraReaderM,#fieldScanReader{width:100%;max-width:420px;margin:0 auto;border-radius:14px;overflow:hidden}
+.scan-feedback{min-height:64px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;border-radius:14px;margin-top:14px;padding:12px;transition:all .3s}
+.scan-feedback.ok{background:rgba(16,185,129,.18);color:#34d399;border:1px solid rgba(16,185,129,.35)}
+.scan-feedback.err{background:rgba(239,68,68,.18);color:#f87171;border:1px solid rgba(239,68,68,.35)}
+.scan-feedback.info{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.3)}
+.code-entry{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center}
+.code-entry input{padding:14px 20px;background:rgba(255,255,255,.06);border:2px solid var(--glass-border);border-radius:14px;color:#fff;font-family:monospace;font-size:20px;letter-spacing:2px;direction:ltr;text-align:center;width:230px}
+.code-entry input:focus{border-color:var(--accent);outline:none}
+/* CODE FIELD + SCAN BUTTON */
+.code-field-wrap{display:flex;gap:8px}
+.code-field-wrap input{flex:1;font-family:monospace;letter-spacing:1px;font-size:15px;direction:ltr}
+.code-hint{display:block;margin-top:6px;font-size:11.5px;color:rgba(255,255,255,.5)}
+.code-hint i{color:var(--accent-light)}
+/* MODALS */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:2000;justify-content:center;align-items:center}
+.modal-overlay.active{display:flex}
+.modal{background:rgba(15,23,42,.97);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:30px;max-width:720px;width:90%;max-height:90vh;overflow-y:auto;animation:slideUp .4s ease;box-shadow:var(--shadow)}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-header h3{font-size:20px;font-weight:800;color:var(--accent-light)}
+.modal-close{background:none;border:none;font-size:28px;cursor:pointer;color:rgba(255,255,255,.4);transition:var(--transition)}
+.modal-close:hover{color:#fff;transform:rotate(90deg)}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-weight:700;margin-bottom:6px;color:rgba(255,255,255,.7);font-size:14px}
+.form-group input,.form-group select,textarea{width:100%;padding:12px 16px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);border-radius:12px;font-size:14px;color:#fff;transition:var(--transition);font-family:Cairo;color-scheme:dark}
+textarea{resize:vertical}
+.form-group input:focus,.form-group select:focus,textarea:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 4px rgba(245,158,11,.1)}
+.form-group input.err{border-color:var(--danger);box-shadow:0 0 0 3px rgba(239,68,68,.15)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.modal-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.f-hint{font-size:13px;color:rgba(255,255,255,.55);background:rgba(0,0,0,.2);padding:10px 14px;border-radius:10px;margin-bottom:12px}
+.search-input{padding:10px 16px;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);border-radius:12px;color:#fff;font-family:Cairo;font-size:14px;min-width:190px}
+.search-input:focus{border-color:var(--accent);outline:none}
+.filter-select{padding:10px 14px;background:rgba(30,41,59,.95);border:1px solid var(--glass-border);border-radius:12px;color:#fff;font-family:Cairo;font-size:13px}
+/* REPORTS */
+.rp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:18px}
+.rp-grid>div{background:rgba(255,255,255,.05);border:1px solid var(--glass-border);border-radius:14px;padding:12px;text-align:center}
+.rp-grid b{display:block;font-size:17px;color:var(--accent-light)}
+.rp-grid span{font-size:11px;color:rgba(255,255,255,.5)}
+.rev-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.rev-row .progress{flex:1;margin:0}
+.rev-name{min-width:130px;font-size:13px;font-weight:600}
+.rev-val{font-size:12.5px;white-space:nowrap;color:var(--accent-light)}
+.debt-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);border-radius:12px;margin-bottom:8px;font-size:13.5px}
+.debt-row span{flex:1}
+/* ============ PUBLIC BOOKING ============ */
+.public-booking{position:fixed;inset:0;z-index:1500;overflow-y:auto;overflow-x:hidden;background:#f1f5f9;display:none;flex-direction:column;align-items:center;scroll-behavior:smooth}
+.pb-preview{position:sticky;top:0;z-index:60;width:100%;display:none;align-items:center;gap:10px;justify-content:space-between;background:#f59e0b;color:#0f172a;padding:10px 20px;font-weight:800;font-size:13.5px;box-shadow:0 4px 18px rgba(0,0,0,.2)}
+.pb-preview button{background:#0f172a;color:#fff;border:none;padding:8px 18px;border-radius:10px;font-weight:800;font-family:Cairo;cursor:pointer}
+.pb-top{position:sticky;top:0;z-index:50;width:100%;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0;padding:12px 18px}
+.pb-top-inner{max-width:860px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.pb-brand{display:flex;align-items:center;gap:12px}
+.pb-brand-logo{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#f59e0b,#fbbf24);display:flex;align-items:center;justify-content:center;font-size:24px;color:#0f172a;box-shadow:0 6px 18px rgba(245,158,11,.35);flex:none}
+.pb-brand-txt b{display:block;font-size:17px;color:#0f172a;font-weight:900;line-height:1.3}
+.pb-brand-txt span{font-size:12px;color:#64748b}
+.pb-cta{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#0f172a;border:none;padding:12px 28px;border-radius:14px;font-weight:800;font-size:15px;font-family:Cairo;cursor:pointer;box-shadow:0 6px 20px rgba(245,158,11,.4);transition:all .3s;animation:ctaPulse 2.5s infinite}
+@keyframes ctaPulse{0%,100%{box-shadow:0 6px 20px rgba(245,158,11,.4)}50%{box-shadow:0 6px 34px rgba(245,158,11,.65)}}
+.pb-cta:hover{transform:scale(1.05)}
+.pb-hero{width:100%;background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);text-align:center;padding:58px 20px 44px;position:relative;overflow:hidden}
+.pb-hero::before{content:'';position:absolute;width:560px;height:560px;background:radial-gradient(circle,rgba(245,158,11,.14) 0%,transparent 65%);top:-200px;left:50%;transform:translateX(-50%)}
+.pb-hero h1{font-size:38px;font-weight:900;color:#0f172a;line-height:1.4;position:relative}
+.pb-grad{background:linear-gradient(135deg,#f59e0b,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.pb-hero p{color:#64748b;font-size:16px;margin:16px auto 0;max-width:580px;line-height:2;position:relative}
+.pb-hero-badges{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:30px 0;position:relative}
+.pb-hb{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:14px 22px;box-shadow:0 6px 18px rgba(15,23,42,.06)}
+.pb-hb i{font-size:24px;color:#f59e0b}
+.pb-hb b{display:block;font-size:18px;color:#0f172a;font-weight:900;line-height:1.2}
+.pb-hb span{font-size:11.5px;color:#64748b}
+.pb-cta-big{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#0f172a;border:none;padding:18px 46px;border-radius:18px;font-size:19px;font-weight:900;font-family:Cairo;cursor:pointer;box-shadow:0 12px 36px rgba(245,158,11,.5);transition:all .3s;position:relative}
+.pb-cta-big:hover{transform:scale(1.03)}
+.pb-hero-note{margin-top:16px;font-size:13px;color:#94a3b8;position:relative}
+.pb-member{width:100%;padding:26px 20px 6px;display:flex;justify-content:center}
+.pb-member-card{background:#fff;border:1px solid #e2e8f0;border-radius:26px;padding:36px 32px;max-width:560px;width:100%;text-align:center;box-shadow:0 18px 44px rgba(15,23,42,.09)}
+.pb-member-icon{width:78px;height:78px;margin:0 auto 14px;border-radius:24px;background:linear-gradient(135deg,#f59e0b,#fbbf24);display:flex;align-items:center;justify-content:center;font-size:36px;color:#0f172a;box-shadow:0 10px 30px rgba(245,158,11,.45)}
+.pb-member-card h2{font-size:27px;font-weight:900;color:#0f172a}
+.pb-member-sub{color:#64748b;font-size:15px;margin:8px 0 16px}
+.pb-member-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.pb-member-badges span{background:rgba(245,158,11,.13);color:#b45309;padding:6px 18px;border-radius:20px;font-size:12.5px;font-weight:800}
+.pb-member-list{list-style:none;text-align:right;margin-bottom:24px}
+.pb-member-list li{display:flex;align-items:center;gap:10px;padding:9px 0;color:#334155;font-size:14.5px;font-weight:600;border-bottom:1px dashed #e2e8f0}
+.pb-member-list li:last-child{border:none}
+.pb-member-list li i{color:#10b981;font-size:17px;flex:none}
+.pb-member-btn{width:100%;padding:17px;background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border:none;border-radius:16px;font-size:17px;font-weight:800;font-family:Cairo;cursor:pointer;transition:all .3s}
+.pb-member-btn:hover{transform:scale(1.01);box-shadow:0 12px 32px rgba(15,23,42,.3)}
+.pb-steps{width:100%;padding:38px 20px 10px;display:flex;flex-direction:column;align-items:center}
+.pb-sec-title{font-size:25px;font-weight:900;color:#0f172a;margin-bottom:26px;position:relative;padding-bottom:12px}
+.pb-sec-title::after{content:'';position:absolute;bottom:0;right:50%;transform:translateX(50%);width:60px;height:4px;background:linear-gradient(90deg,#f59e0b,#fbbf24);border-radius:10px}
+.pb-steps-row{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;max-width:860px}
+.pb-step{background:#fff;border:1px solid #e2e8f0;border-radius:22px;padding:28px 18px 22px;width:235px;text-align:center;position:relative;box-shadow:0 8px 22px rgba(15,23,42,.06);margin-top:14px}
+.pb-step-num{position:absolute;top:-16px;right:50%;transform:translateX(50%);width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#0f172a;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 5px 14px rgba(245,158,11,.45)}
+.pb-step i{font-size:32px;color:#f59e0b;margin:6px 0 12px;display:block}
+.pb-step b{display:block;color:#0f172a;font-size:16px;margin-bottom:6px}
+.pb-step small{color:#64748b;font-size:12.5px;line-height:1.7;display:block}
+.pb-form-section{width:100%;max-width:860px;background:#0f172a;border-radius:34px 34px 0 0;padding:44px 26px 34px;color:#f8fafc;box-shadow:0 -14px 46px rgba(15,23,42,.22);margin-top:30px}
+.pb-form-head{text-align:center;margin-bottom:28px}
+.pb-form-icon{width:66px;height:66px;margin:0 auto 12px;border-radius:20px;background:linear-gradient(135deg,#f59e0b,#fbbf24);display:flex;align-items:center;justify-content:center;font-size:29px;color:#0f172a;box-shadow:0 8px 28px rgba(245,158,11,.45)}
+.pb-form-head h2{font-size:25px;font-weight:900}
+.pb-form-head p{color:rgba(255,255,255,.55);font-size:14px;margin-top:7px}
+#bookingForm h3{font-size:15.5px;font-weight:800;color:var(--accent-light);margin:24px 0 14px;border-right:4px solid var(--accent);padding-right:12px}
+#bookingForm h3:first-child{margin-top:0}
+.req{color:var(--danger)}
+.pb-groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.pb-group{background:rgba(255,255,255,.05);border:2px solid var(--glass-border);border-radius:16px;padding:16px 14px;cursor:pointer;transition:var(--transition);text-align:right}
+.pb-group:hover{border-color:rgba(245,158,11,.5);transform:translateY(-2px)}
+.pb-group.selected{border-color:var(--accent);background:rgba(245,158,11,.13);box-shadow:0 0 0 4px rgba(245,158,11,.12)}
+.pb-group.full{opacity:.45;cursor:not-allowed}
+.pbg-head{font-size:13.5px;display:flex;gap:7px;align-items:center;margin-bottom:8px;font-weight:800}
+.pbg-head i{color:var(--accent-light)}
+.pbg-info{display:flex;flex-direction:column;gap:5px;font-size:11.5px;color:rgba(255,255,255,.55)}
+.pbg-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;flex-wrap:wrap;gap:6px}
+.pbg-price{font-size:12.5px;font-weight:800;color:var(--accent-light)}
+.pbg-seats{font-size:11px;color:#34d399}
+.pb-group.full .pbg-seats{color:#f87171}
+.pb-hint{grid-column:1/-1;text-align:center;color:rgba(255,255,255,.4);font-size:13.5px;padding:14px}
+.paytype-box{display:flex;gap:12px;flex-wrap:wrap}
+.paytype{flex:1;min-width:180px;background:rgba(255,255,255,.05);border:2px solid var(--glass-border);border-radius:14px;padding:16px;cursor:pointer;text-align:center;transition:var(--transition)}
+.paytype:hover{border-color:rgba(245,158,11,.4)}
+.paytype.selected{border-color:var(--accent);background:rgba(245,158,11,.13)}
+.paytype i{font-size:24px;color:var(--accent-light);display:block;margin-bottom:8px}
+.paytype b{font-size:14.5px;display:block}
+.paytype small{font-size:11.5px;color:rgba(255,255,255,.5)}
+.pb-submit{width:100%;padding:18px;margin-top:22px;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:var(--primary);border:none;border-radius:18px;font-size:19px;font-weight:900;font-family:Cairo;cursor:pointer;transition:var(--transition);box-shadow:0 10px 34px rgba(245,158,11,.4)}
+.pb-submit:hover{transform:scale(1.01)}
+.pb-note{text-align:center;font-size:12.5px;color:rgba(255,255,255,.45);margin-top:14px}
+.pb-success{text-align:center;padding:34px 10px;display:none}
+.pbs-icon{width:96px;height:96px;margin:0 auto 20px;background:linear-gradient(135deg,var(--success),#34d399);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff;box-shadow:0 12px 44px rgba(16,185,129,.45);animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.pb-success h2{font-size:24px;margin-bottom:16px}
+.pbs-summary{text-align:right;background:rgba(0,0,0,.3);border:1px solid var(--glass-border);border-radius:18px;padding:20px;margin:18px 0;font-size:14px}
+.pbs-summary div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.1)}
+.pbs-summary div:last-child{border:none}
+.pbs-summary span{color:rgba(255,255,255,.5)}
+.pb-again{margin-top:12px;background:rgba(255,255,255,.08);border:1px solid var(--glass-border);color:#fff;padding:13px 28px;border-radius:12px;font-family:Cairo;font-weight:700;cursor:pointer}
+.pb-footer{width:100%;background:#0b1220;color:rgba(255,255,255,.5);padding:24px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;font-size:13px;border-top:1px solid rgba(255,255,255,.06)}
+.pb-footer span i{color:#f59e0b;margin-left:5px}
+.pb-footer a{color:#fbbf24;text-decoration:none;font-weight:700;cursor:pointer}
+/* TOAST */
+#toastWrap{position:fixed;bottom:24px;left:24px;z-index:6000;display:flex;flex-direction:column;gap:10px}
+.toast{display:flex;align-items:center;gap:10px;background:#10b981;color:#fff;padding:14px 22px;border-radius:14px;font-weight:700;font-size:14px;box-shadow:0 15px 40px rgba(0,0,0,.4);animation:toastIn .35s ease;max-width:380px}
+.toast.error{background:#ef4444}
+.toast.info{background:#3b82f6}
+.toast.out{opacity:0;transform:translateY(10px);transition:all .4s}
+@keyframes toastIn{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+/* RESPONSIVE */
+@media(max-width:992px){
+.sidebar{width:80px;padding:12px 0}
+.sidebar-brand h2{font-size:0}.brand-icon{padding:8px}.brand-icon i{font-size:22px}.sidebar-brand .subtitle{display:none}
+.sidebar-menu a{justify-content:center;padding:12px;font-size:0}
+.sidebar-menu a i{font-size:20px}.sidebar-menu a span{display:none}.sidebar-menu .badge{display:none}.sidebar-footer{display:none}
+.main-content{margin-right:80px}
+.dash-two,.dash-two2{grid-template-columns:1fr}}
+@media(max-width:768px){
+.sidebar{width:0;padding:0;overflow:hidden}
+.main-content{margin-right:0;padding:16px}
+.topbar{flex-direction:column;align-items:stretch}
+.stats-grid{grid-template-columns:1fr 1fr}
+.form-row{grid-template-columns:1fr}
+.cards-grid{grid-template-columns:1fr}
+.login-box{padding:30px 20px}
+.books-mini{grid-template-columns:1fr 1fr 1fr}
+.pb-hero h1{font-size:27px}
+.pb-hero p{font-size:14px}
+.pb-hero-badges{gap:10px}
+.pb-hb{padding:10px 14px;gap:8px}
+.pb-hb b{font-size:15px}
+.pb-cta-big{width:100%;padding:16px}
+.pb-cta{width:100%;padding:12px}
+.pb-top-inner{justify-content:center}
+.pb-groups{grid-template-columns:1fr}
+.pb-form-section{padding:32px 18px 26px}
+.pb-member-card{padding:26px 20px}
+.pb-step{width:100%}
+.pb-brand-txt b{font-size:15px}}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:rgba(255,255,255,.04)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div class="login-page" id="loginPage">
+<div class="login-box">
+<div class="logo"><div class="icon-wrapper"><i class="fas fa-crown"></i></div></div>
+<h1>مستر علاء الحفنى</h1>
+<div class="subtitle">نظام إدارة التعليم الاحترافي</div>
+<div class="form-group">
+<label><i class="fas fa-user"></i> اسم المستخدم</label>
+<select id="loginUser">
+<option value="">-- اختر المستخدم --</option>
+<option value="admin">👑 المدير</option>
+<option value="user1">👤 مستخدم 1 (مشرف)</option>
+<option value="user2">👤 مستخدم 2 (معلم)</option>
+<option value="user3">👤 مستخدم 3 (محاسب)</option>
+</select>
+</div>
+<div class="form-group">
+<label><i class="fas fa-lock"></i> كلمة المرور</label>
+<input type="password" id="loginPassword" placeholder="أدخل كلمة المرور" onkeypress="if(event.key==='Enter')login()">
+</div>
+<button class="btn-login" onclick="login()"><i class="fas fa-sign-in-alt"></i> دخول</button>
+<div class="error-msg" id="loginError"><i class="fas fa-exclamation-circle"></i> <span id="errorText"></span></div>
+<div class="login-help">🔑 <strong>المدير</strong>: admin123 | <strong>المستخدمين</strong>: user123</div>
+</div>
+</div>
+
+<!-- ============ PUBLIC BOOKING ============ -->
+<div class="public-booking" id="publicBookingPage">
+<div class="pb-preview" id="pbPreviewNote">
+<span><i class="fas fa-eye"></i> معاينة المشرف — هذه هي الصفحة التي يراها الطالب</span>
+<button onclick="exitPublicBooking()"><i class="fas fa-arrow-right"></i> عودة للنظام</button>
+</div>
+<header class="pb-top">
+<div class="pb-top-inner">
+<div class="pb-brand">
+<div class="pb-brand-logo"><i class="fas fa-crown"></i></div>
+<div class="pb-brand-txt"><b>مستر علاء الحفنى</b><span>رياضيات • فيزياء • كيمياء</span></div>
+</div>
+<button class="pb-cta" onclick="scrollToPbForm()">ابدأ الآن <i class="fas fa-arrow-left"></i></button>
+</div>
+</header>
+<section class="pb-hero">
+<h1>احجز مكانك <span class="pb-grad">أونلاين</span> في دقيقة واحدة</h1>
+<p>مفيش داعي تيجي أو تتصل — عبّئ بياناتك من الموبايل وهنتواصل معاك<br>لتأكيد الحجز وتحديد موعد أول حصة</p>
+<div class="pb-hero-badges">
+<div class="pb-hb"><i class="fas fa-user-group"></i><div><b>500+</b><span>طالب معنا</span></div></div>
+<div class="pb-hb"><i class="fas fa-award"></i><div><b>15+</b><span>سنة خبرة</span></div></div>
+<div class="pb-hb"><i class="fas fa-trophy"></i><div><b>98%</b><span>نسبة نجاح</span></div></div>
+</div>
+<button class="pb-cta-big" onclick="scrollToPbForm()"><i class="fas fa-bolt"></i> ابدأ الآن — احجز مقعدك</button>
+<div class="pb-hero-note"><i class="fas fa-circle-info"></i> المقاعد المتاحة تظهر مباشرة — التأكيد خلال 24 ساعة</div>
+</section>
+<section class="pb-member">
+<div class="pb-member-card">
+<div class="pb-member-icon"><i class="fas fa-crown"></i></div>
+<h2>انضم الآن</h2>
+<p class="pb-member-sub">مناسب لطلاب الثانوية العامة وجميع المتعلمين</p>
+<div class="pb-member-badges">
+<span>عضوية</span><span>500+ طالب</span><span>15+ سنة خبرة</span>
+</div>
+<ul class="pb-member-list">
+<li><i class="fas fa-circle-check"></i> مجموعات منظمة بسعة محدودة لأفضل متابعة</li>
+<li><i class="fas fa-circle-check"></i> امتحانات أسبوعية وتقارير شهرية لولي الأمر</li>
+<li><i class="fas fa-circle-check"></i> ملازم ومراجعات مستمرة على مدار العام</li>
+<li><i class="fas fa-circle-check"></i> نظام دفع مرن: شهري أو بالحصة</li>
+</ul>
+<button class="pb-member-btn" onclick="scrollToPbForm()">احجز مقعدك الآن <i class="fas fa-arrow-left"></i></button>
+</div>
+</section>
+<section class="pb-steps">
+<h2 class="pb-sec-title">إزاي تحجز مقعدك؟</h2>
+<div class="pb-steps-row">
+<div class="pb-step">
+<span class="pb-step-num">1</span>
+<i class="fas fa-user-pen"></i>
+<b>عبّئ بياناتك</b>
+<small>اسمك ورقم موبايلك بس</small>
+</div>
+<div class="pb-step">
+<span class="pb-step-num">2</span>
+<i class="fas fa-users"></i>
+<b>اختر مجموعتك</b>
+<small>المواعيد والمقاعد المتاحة ظاهرة</small>
+</div>
+<div class="pb-step">
+<span class="pb-step-num">3</span>
+<i class="fas fa-phone-volume"></i>
+<b>اتصال التأكيد</b>
+<small>خلال 24 ساعة لتأكيد الحجز</small>
+</div>
+</div>
+</section>
+<section class="pb-form-section" id="pbFormSection">
+<div class="pb-form-head">
+<div class="pb-form-icon"><i class="fas fa-calendar-check"></i></div>
+<h2>طلب الحجز</h2>
+<p>عبّئ البيانات التالية بدقة لإتمام حجزك</p>
+</div>
+<form id="bookingForm" onsubmit="submitBooking(event)" novalidate>
+<h3><i class="fas fa-user-pen"></i> البيانات الشخصية <small class="req">*</small></h3>
+<div class="form-row">
+<div class="form-group"><label>اسم الطالب الثلاثي <b class="req">*</b></label><input id="pbName" placeholder="مثال: محمد أحمد عبدالله"></div>
+<div class="form-group"><label>رقم هاتف الطالب <b class="req">*</b></label><input id="pbPhone" dir="ltr" placeholder="01xxxxxxxxx"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>هاتف ولي الأمر</label><input id="pbParent" dir="ltr" placeholder="01xxxxxxxxx"></div>
+<div class="form-group"><label>العنوان / المنطقة</label><input id="pbAddress" placeholder="الشارع - المنطقة"></div>
+</div>
+<h3><i class="fas fa-graduation-cap"></i> المرحلة والمجموعة <small class="req">*</small></h3>
+<div class="form-group"><label>المرحلة الدراسية <b class="req">*</b></label>
+<select id="pbStage" onchange="updateBookingGroups()"><option value="">-- اختر المرحلة --</option></select>
+</div>
+<div id="pbGroups" class="pb-groups"></div>
+<h3><i class="fas fa-coins"></i> نظام الدفع المفضل</h3>
+<div class="paytype-box">
+<div class="paytype selected" onclick="selectPayType('monthly',this)"><i class="fas fa-calendar"></i><b>اشتراك شهري</b><small>مبلغ ثابت كل شهر</small></div>
+<div class="paytype" onclick="selectPayType('session',this)"><i class="fas fa-ticket"></i><b>دفع بالحصة</b><small>تدفع فقط عن الحصص التي تحضرها</small></div>
+</div>
+<div class="form-group" style="margin-top:18px"><label>ملاحظات إضافية</label><textarea id="pbNotes" rows="2" placeholder="أي ملاحظات تحب توصلها لمستر علاء..."></textarea></div>
+<button type="submit" class="pb-submit"><i class="fas fa-paper-plane"></i> إرسال طلب الحجز الآن</button>
+<p class="pb-note"><i class="fas fa-shield-halved"></i> بالضغط على إرسال سيتم التواصل معك خلال 24 ساعة لتأكيد الحجز</p>
+</form>
+<div id="bookingSuccess" class="pb-success">
+<div class="pbs-icon"><i class="fas fa-check"></i></div>
+<h2>تم إرسال طلبك بنجاح! 🎉</h2>
+<p>رقم الطلب: <b id="reqCode" class="mono" style="color:var(--accent-light);font-size:19px"></b></p>
+<div class="pbs-summary" id="pbsSummary"></div>
+<p style="color:rgba(255,255,255,.6)">سيتواصل معك مستر علاء خلال 24 ساعة لتأكيد الحجز وتحديد موعد أول حصة.</p>
+<button onclick="initPublicBooking()" class="pb-again"><i class="fas fa-plus"></i> حجز طالب آخر</button>
+</div>
+</section>
+<footer class="pb-footer">
+<span><i class="fas fa-phone"></i> 01000000000</span>
+<span><i class="fas fa-location-dot"></i> العنوان - المركز</span>
+<span><i class="fas fa-clock"></i> من 9 صباحاً حتى 10 مساءً</span>
+<a onclick="exitPublicBooking()">دخول الإدارة</a>
+</footer>
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<div class="app-container" id="appContainer">
+<div class="sidebar" id="sidebar">
+<div class="sidebar-brand">
+<div class="brand-icon"><i class="fas fa-crown"></i></div>
+<h2>مستر علاء</h2>
+<div class="subtitle">نظام إدارة التعليم</div>
+</div>
+<ul class="sidebar-menu">
+<li><a class="active" data-section="dashboard"><i class="fas fa-home"></i><span>الرئيسية</span></a></li>
+<li><a data-section="stages"><i class="fas fa-layer-group"></i><span>المراحل</span><span class="badge" id="stagesCount">0</span></a></li>
+<li><a data-section="groups"><i class="fas fa-users"></i><span>المجموعات</span><span class="badge" id="groupsCount">0</span></a></li>
+<li><a data-section="group-details"><i class="fas fa-users-cog"></i><span>تفاصيل المجموعات</span></a></li>
+<li><a data-section="students"><i class="fas fa-user-graduate"></i><span>الطلاب</span><span class="badge" id="studentsCount">0</span></a></li>
+<li><a data-section="booking"><i class="fas fa-link"></i><span>حجز اونلاين</span><span class="badge" id="bookingBadge">0</span></a></li>
+<li><a data-section="books"><i class="fas fa-book"></i><span>الملازم</span></a></li>
+<li><a data-section="codes"><i class="fas fa-qrcode"></i><span>الكود والباركود</span></a></li>
+<li><a data-section="attendance"><i class="fas fa-clipboard-check"></i><span>الحضور</span></a></li>
+<li><a data-section="payments"><i class="fas fa-credit-card"></i><span>الدفع</span></a></li>
+<li><a data-section="treasury"><i class="fas fa-vault"></i><span>الخزينة</span></a></li>
+<li><a data-section="reports"><i class="fas fa-chart-bar"></i><span>التقارير</span></a></li>
+<li><a data-section="settings"><i class="fas fa-cog"></i><span>الإعدادات</span></a></li>
+</ul>
+<div class="sidebar-footer"><i class="fas fa-user"></i> <span id="currentUserDisplay">المدير</span></div>
+</div>
+
+<div class="main-content">
+<div class="topbar">
+<div class="user-info">
+<div class="avatar" id="userAvatar">ع</div>
+<div><div class="user-name" id="userNameDisplay">علاء الحفنى</div><div class="user-role" id="userRoleDisplay">مدير النظام</div></div>
+<span class="role-badge" id="roleBadge"><i class="fas fa-crown"></i> مدير</span>
+</div>
+<div class="topbar-actions">
+<div class="save-indicator" id="saveStatus"><i class="fas fa-circle-check"></i> الحفظ التلقائي مفعل</div>
+<div class="topbar-date" id="todayDate"></div>
+<button class="btn-key" onclick="quickBackup()" title="نسخة احتياطية سريعة"><i class="fas fa-save"></i></button>
+<button class="btn-bell" onclick="showSection('booking')" title="طلبات الحجز"><i class="fas fa-bell"></i><span class="bell-dot" id="bellDot"></span></button>
+<button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> خروج</button>
+</div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-icon"><i class="fas fa-layer-group"></i></div><div class="stat-number" id="statStages">0</div><div class="stat-label">المراحل</div></div>
+<div class="stat-card"><div class="stat-icon"><i class="fas fa-users"></i></div><div class="stat-number" id="statGroups">0</div><div class="stat-label">المجموعات</div></div>
+<div class="stat-card"><div class="stat-icon"><i class="fas fa-user-graduate"></i></div><div class="stat-number" id="statStudents">0</div><div class="stat-label">الطلاب</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,.1);color:#34d399"><i class="fas fa-vault"></i></div><div class="stat-number" id="statTreasury">0</div><div class="stat-label">رصيد الخزينة (ج.م)</div></div>
+</div>
+
+<!-- 1. DASHBOARD -->
+<div class="section active" id="section-dashboard">
+<div class="section-header">
+<h3><i class="fas fa-chart-line"></i> لوحة التحكم</h3>
+<button class="btn btn-primary" onclick="renderAll();showToast('تم التحديث 🔄','info')"><i class="fas fa-sync"></i> تحديث</button>
+</div>
+<div class="quick-keys">
+<div class="qkey" onclick="quickBackup()"><i class="fas fa-save"></i><b>نسخة احتياطية</b><small>حفظ فوري على الفلاشة</small></div>
+<div class="qkey" onclick="openModal('student')"><i class="fas fa-user-plus"></i><b>تسجيل طالب</b><small>مع كود وبطاقة باركود</small></div>
+<div class="qkey" onclick="openScannerModal()"><i class="fas fa-barcode"></i><b>حضور بالباركود</b><small>امسح كارت الطالب</small></div>
+<div class="qkey" onclick="openModal('payment')"><i class="fas fa-cash-register"></i><b>تسجيل دفعة</b><small>خزينة الدخل</small></div>
+<div class="qkey" onclick="openDailyReport()"><i class="fas fa-calendar-day"></i><b>تقرير اليوم</b><small>حضور ودخل اليوم</small></div>
+</div>
+<div class="cards-grid" id="dashboardGroups"></div>
+<div class="dash-two">
+<div class="glass-card"><div class="card-header"><h4><i class="fas fa-chart-column"></i> الإيرادات — آخر 6 شهور</h4></div><div class="revenue-chart" id="revenueChart"></div></div>
+<div class="glass-card"><div class="card-header"><h4><i class="fas fa-bell"></i> طلبات حجز جديدة</h4><span class="badge-count" id="pendingCount">0</span></div><div id="dashBookings"></div></div>
+</div>
+<div class="dash-two2">
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-book"></i> الملازم — نظرة سريعة</h4>
+<button class="btn btn-accent btn-sm" onclick="showSection('books')">إدارة الملازم <i class="fas fa-arrow-left"></i></button></div>
+<div class="books-mini" id="booksMiniStats"></div>
+<div id="booksMiniList"></div>
+</div>
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-calendar-check"></i> ملخص اليوم</h4></div>
+<div class="books-mini" id="todayMiniStats"></div>
+<div id="todayMiniList"></div>
+</div>
+</div>
+</div>
+
+<!-- 2. STAGES -->
+<div class="section" id="section-stages">
+<div class="section-header">
+<h3><i class="fas fa-layer-group"></i> المراحل الدراسية</h3>
+<button class="btn btn-primary" onclick="openModal('stage')"><i class="fas fa-plus"></i> مرحلة جديدة</button>
+</div>
+<div class="table-container">
+<table><thead><tr><th>#</th><th>اسم المرحلة</th><th>الوصف</th><th>المجموعات</th><th>الطلاب</th><th>الإجراءات</th></tr></thead>
+<tbody id="stagesTableBody"></tbody></table>
+</div>
+</div>
+
+<!-- 3. GROUPS -->
+<div class="section" id="section-groups">
+<div class="section-header">
+<h3><i class="fas fa-users"></i> المجموعات</h3>
+<button class="btn btn-primary" onclick="openModal('group')"><i class="fas fa-plus"></i> مجموعة جديدة</button>
+</div>
+<div class="table-container">
+<table><thead><tr><th>#</th><th>اسم المجموعة</th><th>المرحلة</th><th>الطلاب/السعة</th><th>المعلم</th><th>الموعد</th><th>الرسوم</th><th>الإجراءات</th></tr></thead>
+<tbody id="groupsTableBody"></tbody></table>
+</div>
+</div>
+
+<!-- 4. GROUP DETAILS -->
+<div class="section" id="section-group-details">
+<div class="section-header">
+<h3><i class="fas fa-users-cog"></i> تفاصيل المجموعات - كاملة</h3>
+<button class="btn btn-success" onclick="printFullReport()"><i class="fas fa-file-pdf"></i> تصدير الكل</button>
+</div>
+<div id="groupsFullContainer"></div>
+</div>
+
+<!-- 5. STUDENTS -->
+<div class="section" id="section-students">
+<div class="section-header">
+<h3><i class="fas fa-user-graduate"></i> الطلاب</h3>
+<div class="header-tools">
+<input class="search-input" id="studentSearch" placeholder="🔍 بحث بالاسم / الكود / الهاتف" onkeyup="renderStudents()">
+<select class="filter-select" id="studentGroupFilter" onchange="renderStudents()"><option value="">كل المجموعات</option></select>
+<select class="filter-select" id="studentPayFilter" onchange="renderStudents()"><option value="">كل أنواع الدفع</option><option value="monthly">شهري</option><option value="session">بالحصة</option></select>
+<button class="btn btn-success" onclick="exportCSV('students')"><i class="fas fa-file-csv"></i> CSV</button>
+<button class="btn btn-primary" onclick="openModal('student')"><i class="fas fa-plus"></i> تسجيل طالب جديد</button>
+</div>
+</div>
+<div class="table-container">
+<table><thead><tr><th>#</th><th>الاسم</th><th>المجموعة</th><th>الكود</th><th>الهاتف</th><th>الدفع</th><th>الحالة</th><th>تقرير</th><th>كارت</th><th>الإجراءات</th></tr></thead>
+<tbody id="studentsTableBody"></tbody></table>
+</div>
+</div>
+
+<!-- 6. BOOKING -->
+<div class="section" id="section-booking">
+<div class="section-header">
+<h3><i class="fas fa-link"></i> الحجز الإلكتروني</h3>
+<div class="header-tools">
+<button class="btn btn-primary" onclick="generateBookingLink()"><i class="fas fa-sync"></i> تجديد الرابط</button>
+<button class="btn btn-success" onclick="copyBookingLink()"><i class="fas fa-copy"></i> نسخ الرابط</button>
+</div>
+</div>
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-globe"></i> رابط الحجز النشط</h4><span class="status-badge status-active">مفعل</span></div>
+<div class="booking-link-box">
+<div class="qr-sim"><i class="fas fa-qrcode"></i></div>
+<div class="link-text" id="bookingLink"></div>
+<p style="color:rgba(255,255,255,.4);font-size:13px;margin-top:10px"><i class="fas fa-info-circle"></i> الطالب يفتح الرابط، يشوف صفحة هبوط كاملة ويرسل طلبه — يصلك هنا فوراً</p>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px">
+<button class="btn btn-primary" onclick="copyBookingLink()"><i class="fas fa-copy"></i> نسخ الرابط</button>
+<button class="btn btn-accent" onclick="showBookingQR()"><i class="fas fa-qrcode"></i> عرض QR</button>
+<button class="btn btn-info" onclick="previewBookingPage()"><i class="fas fa-external-link"></i> معاينة صفحة الحجز</button>
+<button class="btn btn-outline" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i> مشاركة واتساب</button>
+</div>
+</div>
+<div class="glass-card" style="margin-top:20px">
+<div class="card-header"><h4><i class="fas fa-calendar-check"></i> طلبات الحجز</h4><span class="status-badge status-active" id="bookingCount">0</span></div>
+<div id="bookingRequestsList"></div>
+</div>
+</div>
+
+<!-- 7. BOOKS -->
+<div class="section" id="section-books">
+<div class="section-header">
+<h3><i class="fas fa-book"></i> إدارة الملازم</h3>
+<button class="btn btn-primary" onclick="openModal('book')"><i class="fas fa-plus"></i> ملزمة جديدة</button>
+</div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-icon"><i class="fas fa-book"></i></div><div class="stat-number" id="bkTitles">0</div><div class="stat-label">عدد الملازم</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(59,130,246,.1);color:#93c5fd"><i class="fas fa-boxes-stacked"></i></div><div class="stat-number" id="bkStock">0</div><div class="stat-label">نسخ بالمخزن</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,.1);color:#34d399"><i class="fas fa-cart-shopping"></i></div><div class="stat-number" id="bkSold">0</div><div class="stat-label">نسخ مباعة</div></div>
+<div class="stat-card"><div class="stat-icon"><i class="fas fa-coins"></i></div><div class="stat-number" id="bkRevenue">0</div><div class="stat-label">إيرادات الملازم (ج.م)</div></div>
+</div>
+<div id="booksContainer" class="cards-grid"></div>
+</div>
+
+<!-- 8. CODES -->
+<div class="section" id="section-codes">
+<div class="section-header">
+<h3><i class="fas fa-qrcode"></i> الكود والباركود</h3>
+<div class="header-tools">
+<button class="btn btn-success" onclick="printAllCards()"><i class="fas fa-print"></i> طباعة كل الكروت</button>
+<button class="btn btn-primary" onclick="generateAllCodes()"><i class="fas fa-sync"></i> تحديث الأكواد</button>
+</div>
+</div>
+<p class="f-hint"><i class="fas fa-circle-info"></i> اطبع الكارت لكل طالب — الكروت تُطبع 3-4 في السطر — الطالب يمسح الباركود بكاميرا الموبايل أو الماسح عند الحضور، أو يكتب الكود يدوياً.</p>
+<div class="cards-grid" id="codesContainer"></div>
+</div>
+
+<!-- 9. ATTENDANCE -->
+<div class="section" id="section-attendance">
+<div class="section-header">
+<h3><i class="fas fa-clipboard-check"></i> تسجيل الحضور والغياب</h3>
+</div>
+<div class="tabs">
+<button class="tab active" onclick="switchAttMode('manual',this)"><i class="fas fa-hand"></i> يدوي</button>
+<button class="tab" onclick="switchAttMode('barcode',this)"><i class="fas fa-barcode"></i> بالباركود (كاميرا)</button>
+<button class="tab" onclick="switchAttMode('code',this)"><i class="fas fa-keyboard"></i> بالكود</button>
+</div>
+<div id="attManual">
+<div class="glass-card">
+<div class="form-row" style="margin-bottom:16px">
+<div class="form-group"><label>المجموعة</label>
+<select id="attGroup" onchange="renderAttList()"><option value="">-- اختر المجموعة --</option></select></div>
+<div class="form-group"><label>التاريخ</label><input type="date" id="attDate" onchange="renderAttList()"></div>
+</div>
+<div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+<button class="btn btn-success btn-sm" onclick="attMarkAll('present')"><i class="fas fa-check-double"></i> الكل حاضر</button>
+<button class="btn btn-danger btn-sm" onclick="attMarkAll('absent')"><i class="fas fa-times"></i> الكل غائب</button>
+<button class="btn btn-primary btn-sm" onclick="saveAttList()"><i class="fas fa-save"></i> حفظ الكل</button>
+</div>
+<div id="attStudentsList"><p class="empty">اختر المجموعة لعرض الطلاب</p></div>
+</div>
+</div>
+<div id="attBarcode" style="display:none">
+<div class="glass-card">
+<div class="scan-box">
+<div id="cameraReader"></div>
+<div id="scanFeedback" class="scan-feedback info"><i class="fas fa-barcode"></i> وجّه الكاميرا على باركود كارت الطالب</div>
+<div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+<button class="btn btn-primary" onclick="startCamera()"><i class="fas fa-camera"></i> تشغيل الكاميرا</button>
+<button class="btn btn-danger" onclick="stopCamera()"><i class="fas fa-stop"></i> إيقاف</button>
+</div>
+<p class="f-hint" style="margin-top:14px"><i class="fas fa-lightbulb"></i> عند المسح: يُسجَّل الحضور فوراً — ولو الطالب نظام دخوله "بالحصة" يتسجل دفع الحصة تلقائياً في الخزينة 💰</p>
+</div>
+</div>
+</div>
+<div id="attCode" style="display:none">
+<div class="glass-card" style="text-align:center">
+<p style="margin-bottom:16px;color:rgba(255,255,255,.6);font-size:14px"><i class="fas fa-keyboard"></i> ضع المؤشر في الخانة ثم امسح كارت الطالب بالماسح — أو اكتب الكود واضغط Enter</p>
+<div class="code-entry">
+<input id="codeInput" placeholder="AL001" onkeypress="if(event.key==='Enter')processCodeEntry()">
+<button class="btn btn-primary" onclick="processCodeEntry()"><i class="fas fa-check"></i> تسجيل</button>
+</div>
+<div style="margin-top:16px;display:flex;gap:14px;justify-content:center;align-items:center">
+<label style="font-size:13.5px;font-weight:700"><input type="radio" name="codeStatus" value="present" checked> تسجيل حضور ✅</label>
+<label style="font-size:13.5px;font-weight:700"><input type="radio" name="codeStatus" value="absent"> تسجيل غياب ❌</label>
+</div>
+<div id="codeFeedback" class="scan-feedback" style="margin-top:16px;display:none"></div>
+</div>
+</div>
+<div class="table-container" style="margin-top:20px">
+<div class="card-header" style="border:none;padding:0;margin-bottom:10px"><h4><i class="fas fa-list"></i> آخر سجلات الحضور</h4></div>
+<table><thead><tr><th>#</th><th>الطالب</th><th>المجموعة</th><th>الحالة</th><th>التاريخ</th><th>طريقة التسجيل</th><th>حذف</th></tr></thead>
+<tbody id="attendanceTableBody"></tbody></table>
+</div>
+</div>
+
+<!-- 10. PAYMENTS -->
+<div class="section" id="section-payments">
+<div class="section-header">
+<h3><i class="fas fa-credit-card"></i> سجل الدفعات والخزينة</h3>
+<div class="header-tools">
+<button class="btn btn-success" onclick="exportCSV('payments')"><i class="fas fa-file-csv"></i> CSV</button>
+<button class="btn btn-primary" onclick="openModal('payment')"><i class="fas fa-plus"></i> تسجيل دفعة</button>
+</div>
+</div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,.1);color:#34d399"><i class="fas fa-coins"></i></div><div class="stat-number" id="payToday">0</div><div class="stat-label">دخل اليوم (ج.م)</div></div>
+<div class="stat-card"><div class="stat-icon"><i class="fas fa-calendar"></i></div><div class="stat-number" id="payMonth">0</div><div class="stat-label">دخل الشهر (ج.م)</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(59,130,246,.1);color:#93c5fd"><i class="fas fa-calendar-days"></i></div><div class="stat-number" id="payYear">0</div><div class="stat-label">دخل السنة (ج.م)</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,.1)"><i class="fas fa-sack-dollar"></i></div><div class="stat-number" id="payTotal">0</div><div class="stat-label">الإجمالي الكلي (ج.م)</div></div>
+</div>
+<div class="glass-card" style="margin-bottom:16px">
+<div class="card-header"><h4><i class="fas fa-filter"></i> تصفية الدفعات حسب الفترة</h4>
+<button class="btn btn-outline btn-sm" onclick="resetPayFilter()"><i class="fas fa-rotate-left"></i> إعادة ضبط</button></div>
+<div class="chips" id="payChips">
+<button class="chip active" onclick="setPayPreset('all',this)">الكل</button>
+<button class="chip" onclick="setPayPreset('today',this)">اليوم</button>
+<button class="chip" onclick="setPayPreset('yesterday',this)">أمس</button>
+<button class="chip" onclick="setPayPreset('week',this)">آخر 7 أيام</button>
+<button class="chip" onclick="setPayPreset('month',this)">هذا الشهر</button>
+<button class="chip" onclick="setPayPreset('year',this)">هذه السنة</button>
+<button class="chip" onclick="setPayPreset('custom',this)">فترة مخصصة</button>
+</div>
+<div class="range-box" style="margin-top:12px">
+<span>من تاريخ</span>
+<input type="date" class="filter-date" id="payFrom" onchange="payCustomChanged()">
+<span>إلى تاريخ</span>
+<input type="date" class="filter-date" id="payTo" onchange="payCustomChanged()">
+<button class="btn btn-primary btn-sm" onclick="printPaymentsReport()"><i class="fas fa-print"></i> طباعة النتائج</button>
+</div>
+</div>
+<div class="table-container">
+<div class="filter-summary" id="payFilterSummary"></div>
+<table><thead><tr><th>#</th><th>الطالب</th><th>المجموعة</th><th>النوع</th><th>المبلغ</th><th>التاريخ</th><th>طريقة الدفع</th><th>ملاحظات</th><th>حذف</th></tr></thead>
+<tbody id="paymentsTableBody"></tbody></table>
+</div>
+</div>
+
+<!-- 11. TREASURY -->
+<div class="section" id="section-treasury">
+<div class="section-header">
+<h3><i class="fas fa-vault"></i> الخزينة</h3>
+<button class="btn btn-danger" onclick="openModal('expense')"><i class="fas fa-minus"></i> تسجيل مصروف</button>
+</div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,.1);color:#34d399"><i class="fas fa-scale-balanced"></i></div><div class="stat-number" id="trBalance">0</div><div class="stat-label">الرصيد الحالي (ج.م)</div></div>
+<div class="stat-card"><div class="stat-icon"><i class="fas fa-arrow-down"></i></div><div class="stat-number" id="trIncome">0</div><div class="stat-label">إجمالي الوارد (ج.م)</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(239,68,68,.1);color:#f87171"><i class="fas fa-arrow-up"></i></div><div class="stat-number" id="trExpenses">0</div><div class="stat-label">إجمالي المصروف (ج.م)</div></div>
+</div>
+<div class="cards-grid">
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-arrow-down"></i> الوارد حسب النوع</h4></div>
+<div id="trIncomeByType"></div>
+</div>
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-receipt"></i> المصروفات</h4><span class="status-badge status-deleted" id="trExpCount">0</span></div>
+<div id="expensesList"></div>
+</div>
+</div>
+</div>
+
+<!-- 12. REPORTS -->
+<div class="section" id="section-reports">
+<div class="section-header">
+<h3><i class="fas fa-chart-bar"></i> التقارير الاحترافية</h3>
+</div>
+<div class="cards-grid">
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-calendar-day"></i> التقرير اليومي</h4></div>
+<p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:14px">حضور ودخل ومصروفات وطلبات حجز يوم محدد</p>
+<div class="form-group"><label>اختر التاريخ</label><input type="date" id="dailyDate"></div>
+<div class="modal-actions"><button class="btn btn-primary" onclick="openDailyReport()"><i class="fas fa-eye"></i> عرض</button></div>
+</div>
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-calendar"></i> التقرير الشهري</h4></div>
+<p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:14px">دخل ومصروفات وحضور وديون شهر كامل</p>
+<div class="form-group"><label>اختر الشهر</label><input type="month" id="monthPick"></div>
+<div class="modal-actions"><button class="btn btn-primary" onclick="openMonthlyReport()"><i class="fas fa-eye"></i> عرض</button></div>
+</div>
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-calendar-days"></i> التقرير السنوي</h4></div>
+<p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:14px">أداء 12 شهر + صافي كل شهر</p>
+<div class="form-group"><label>اختر السنة</label><input type="number" id="yearPick"></div>
+<div class="modal-actions"><button class="btn btn-primary" onclick="openYearlyReport()"><i class="fas fa-eye"></i> عرض</button></div>
+</div>
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-chalkboard"></i> جرد الحصص</h4></div>
+<p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:14px">عدد الحصص المعطاة لكل مجموعة وحضور كل طالب ودفع حصصه</p>
+<div class="modal-actions"><button class="btn btn-info" onclick="openSessionsReport()"><i class="fas fa-eye"></i> عرض الجرد</button></div>
+</div>
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-book"></i> جرد الملازم</h4></div>
+<p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:14px">المخزون والمبيعات وإيرادات وقيمة كل ملزمة</p>
+<div class="modal-actions"><button class="btn btn-info" onclick="openBooksReport()"><i class="fas fa-eye"></i> عرض الجرد</button></div>
+</div>
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-box-archive"></i> الجرد الشامل</h4></div>
+<p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:14px">كل شيء في تقرير واحد: طلاب، خزينة، ملازم، ديون، مجموعات</p>
+<div class="modal-actions"><button class="btn btn-success" onclick="openFullInventory()"><i class="fas fa-eye"></i> عرض الجرد الشامل</button></div>
+</div>
+</div>
+</div>
+
+<!-- 13. SETTINGS -->
+<div class="section" id="section-settings">
+<div class="section-header">
+<h3><i class="fas fa-cog"></i> الإعدادات</h3>
+<button class="btn btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> حفظ</button>
+</div>
+<div class="cards-grid">
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-sliders"></i> الإعدادات العامة</h4></div>
+<div class="form-group"><label>اسم المركز</label><input type="text" id="centerName"></div>
+<div class="form-row">
+<div class="form-group"><label>عدد الحصص في الشهر</label><input type="number" id="totalSessions"></div>
+<div class="form-group"><label>الغياب المسموح به</label><input type="number" id="allowedAbsence"></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label>رسوم الاشتراك الشهري (ج.م)</label><input type="number" id="subscriptionFee"></div>
+<div class="form-group"><label>رسوم الحصة الواحدة (ج.م)</label><input type="number" id="sessionFee"></div>
+</div>
+<div class="form-group"><label><i class="fab fa-whatsapp"></i> رقم واتساب المركز (لاستقبال طلبات الحجز)</label><input type="text" id="whatsappNumber" dir="ltr" placeholder="مثال: 01000000000"></div>
+<div class="form-group"><label><i class="fas fa-globe"></i> رابط الحجز الإلكتروني المنشور (بعد رفع الصفحة على الإنترنت)</label><input type="text" id="bookingPublicUrl" dir="ltr" placeholder="مثال: https://alaa-center.netlify.app"></div>
+</div>
+<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-database"></i> النسخ الاحتياطي والحفظ التلقائي</h4></div>
+<p class="f-hint"><i class="fas fa-circle-check" style="color:#34d399"></i> <b>الحفظ التلقائي مفعل:</b> النظام يحفظ كل البيانات فور أي تعديل + كل 30 ثانية + تلقائياً عند غلق الصفحة أو الجهاز.</p>
+<div class="form-group"><label><i class="fas fa-folder-open"></i> مسار النسخ الاحتياطي المفضل (للتذكر فقط)</label><input type="text" id="backupPath" placeholder="مثال: E:\MrAlaaBackup  أو  D:\نسخ المركز"></div>
+<p class="f-hint"><i class="fas fa-clock-rotate-left"></i> آخر نسخة احتياطية: <b id="lastBackupInfo">—</b></p>
+<div class="modal-actions" style="flex-direction:column;align-items:stretch">
+<button class="btn btn-success" onclick="quickBackup()"><i class="fas fa-save"></i> إنشاء نسخة احتياطية الآن</button>
+<label class="btn btn-info" style="cursor:pointer;justify-content:center"><i class="fas fa-upload"></i> استيراد نسخة احتياطية
+<input type="file" accept=".json" onchange="importBackup(this)" style="display:none"></label>
+<button class="btn btn-danger" onclick="resetAll()"><i class="fas fa-rotate-left"></i> إعادة ضبط النظام (بيانات تجريبية)</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+<div class="modal">
+<div class="modal-header"><h3 id="modalTitle">إضافة جديد</h3><button class="modal-close" onclick="closeModal()">&times;</button></div>
+<div id="modalBody"></div>
+</div>
+</div>
+
+<!-- SCAN OVERLAY -->
+<div class="modal-overlay" id="scanOverlay" style="z-index:2500" onclick="if(event.target===this)closeScanOverlay()">
+<div class="modal" style="max-width:520px">
+<div class="modal-header"><h3><i class="fas fa-barcode"></i> مسح كارت الطالب</h3><button class="modal-close" onclick="closeScanOverlay()">&times;</button></div>
+<div id="scanModalBody"></div>
+</div>
+</div>
+
+<!-- CONFIRM -->
+<div class="modal-overlay" id="confirmOverlay" onclick="if(event.target===this)closeConfirm()">
+<div class="modal" style="max-width:430px;text-align:center">
+<div style="font-size:52px;color:#f59e0b;margin-bottom:10px"><i class="fas fa-triangle-exclamation"></i></div>
+<p id="confirmMsg" style="font-size:16px;font-weight:700;margin-bottom:22px"></p>
+<div class="modal-actions" style="justify-content:center">
+<button class="btn btn-danger" onclick="doConfirm()"><i class="fas fa-check"></i> نعم، متأكد</button>
+<button class="btn btn-outline" onclick="closeConfirm()">إلغاء</button>
+</div>
+</div>
+</div>
+
+<div id="toastWrap"></div>
+
+<script>
+/* ============ USERS & STORAGE ============ */
+const Users={admin:{name:'علاء الحفنى',password:'admin123',role:'مدير',icon:'ع'},user1:{name:'أحمد محمد',password:'user123',role:'مشرف',icon:'أ'},user2:{name:'سارة علي',password:'user123',role:'معلم',icon:'س'},user3:{name:'خالد حسن',password:'user123',role:'محاسب',icon:'خ'}};
+const STORAGE_KEY='mrAlaaPro_v7';
+const $=id=>document.getElementById(id);
+function defaultData(){return{stages:[],groups:[],students:[],attendance:[],payments:[],expenses:[],books:[],bookSales:[],bookings:[],nextId:100,nextStudentCode:1,bookingToken:'ALAA'+Math.floor(Math.random()*900+100),currentUser:null,editing:null,selectedGroupId:null,selectedPayType:'monthly',payFilterMode:'all',lastBackup:'',seeded:false,settings:{centerName:'مستر علاء الحفنى',totalSessions:8,allowedAbsence:3,subscriptionFee:1200,sessionFee:150,backupPath:'',whatsapp:'',bookingPublicUrl:''}}}
+let AppData=(()=>{try{const d=JSON.parse(localStorage.getItem(STORAGE_KEY));if(d&&d.settings)return d}catch(e){}return defaultData()})();
+function markSaved(){const t=new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});const el=$('saveStatus');if(el)el.innerHTML='<i class="fas fa-circle-check"></i> حُفظ تلقائياً '+t}
+function saveData(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(AppData));markSaved()}catch(e){}}
+window.addEventListener('beforeunload',()=>{try{saveData()}catch(e){}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)saveData()});
+setInterval(()=>saveData(),30000);
+
+/* ============ HELPERS ============ */
+const stageName=id=>((AppData.stages||[]).find(s=>s.id==id)||{}).name||'—';
+const groupName=id=>((AppData.groups||[]).find(g=>g.id==id)||{}).name||'—';
+const studentById=id=>AppData.students.find(s=>s.id==id);
+const groupStudents=gid=>AppData.students.filter(s=>s.groupId==gid&&s.status!=='deleted');
+const fmt=n=>Number(n||0).toLocaleString('en-US');
+const money=n=>fmt(n)+' ج.م';
+const fmtDate=dt=>{try{return new Date(dt).toLocaleDateString('ar-EG',{day:'numeric',month:'long',year:'numeric'})}catch(e){return dt}};
+const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const monthKey=()=>todayStr().slice(0,7);
+function attRate(sid){const r=AppData.attendance.filter(a=>a.studentId==sid);if(!r.length)return{present:0,absent:0,rate:0};const p=r.filter(x=>x.status==='present').length;return{present:p,absent:r.length-p,rate:Math.round(p/r.length*100)}}
+function studentPaid(sid){return AppData.payments.filter(p=>p.studentId==sid).reduce((a,p)=>a+Number(p.amount),0)}
+function studentBalance(s){const g=AppData.groups.find(x=>x.id==s.groupId);
+if(s.paymentType==='session'){const attended=attRate(s.id).present;const should=attended*AppData.settings.sessionFee;return should-studentPaid(s.id)}
+return(g?g.price:AppData.settings.subscriptionFee)-studentPaid(s.id)}
+const totalIncome=()=>AppData.payments.reduce((a,p)=>a+Number(p.amount),0);
+const totalExp=()=>AppData.expenses.reduce((a,e)=>a+Number(e.amount),0);
+const trBalance=()=>totalIncome()-totalExp();
+
+/* ============ TOAST & CONFIRM ============ */
+function showToast(msg,type='success'){const t=document.createElement('div');t.className='toast '+type;t.innerHTML=`<i class="fas ${type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':'fa-info-circle'}"></i> ${msg}`;$('toastWrap').appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),400)},3200)}
+let _cb=null;
+function confirmAction(msg,cb){$('confirmMsg').textContent=msg;$('confirmOverlay').classList.add('active');_cb=cb}
+function doConfirm(){$('confirmOverlay').classList.remove('active');if(_cb)_cb();_cb=null}
+function closeConfirm(){$('confirmOverlay').classList.remove('active');_cb=null}
+function beep(ok){try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=ok?900:200;o.type='sine';g.gain.setValueAtTime(.25,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.25);o.start();o.stop(ctx.currentTime+.25)}catch(e){}}
+
+/* ============ ====== النظام الجديد للطباعة (كروت 3-4 في السطر) ====== ============ */
+function openPrintWindow(contentHtml,extraScripts){
+const html=`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>طباعة — ${AppData.settings.centerName}</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+@page{margin:8mm}
+*{font-family:'Cairo',sans-serif;box-sizing:border-box}
+body{margin:0;padding:0;background:#fff;color:#000}
+p{color:#000;margin:6px 0}
+.pr-head{text-align:center;margin-bottom:14px;border-bottom:2px solid #000;padding-bottom:10px}
+.pr-head h1{font-size:22px;color:#000;margin:0}
+.pr-head p{font-size:13px;color:#333;margin:4px 0 0}
+table.pt{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+table.pt th,table.pt td{border:1px solid #000;padding:7px;text-align:center;color:#000}
+table.pt th{background:#eee}
+h3{color:#000;font-size:15px;margin:14px 0 6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;padding:10px}
+.card{border:2px solid #000;border-radius:12px;padding:12px 8px 10px;text-align:center;page-break-inside:avoid;break-inside:avoid}
+.card h3{margin:0;font-size:13px;color:#000;line-height:1.4}
+.grp{font-size:10px;color:#555;margin-top:2px}
+.pname{font-size:14.5px;font-weight:900;color:#000;margin:6px 0 2px;line-height:1.35}
+.pg{font-size:10.5px;color:#444;margin-bottom:6px}
+.card svg{max-width:100%}
+.pf{font-size:8.5px;color:#666;margin-top:6px}
+@media(max-width:640px){.cards{grid-template-columns:repeat(2,1fr)}}
+</style></head><body>
+ ${contentHtml}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"><\/script>
+<script>window.addEventListener('load',function(){try{${extraScripts||''}}catch(e){}setTimeout(function(){window.print()},700)});<\/script>
+</body></html>`;
+const w=window.open('','_blank');
+if(!w){showToast('المتصفح حظر النافذة — اسمح بالنوافذ المنبثقة (Pop-ups) وأعد المحاولة','error');return false}
+w.document.open();w.document.write(html);w.document.close();
+return true}
+
+function printCardsNow(students){
+if(!students||!students.length)return showToast('لا يوجد طلاب لطباعة كروتهم','error');
+let cards='',scripts='';
+students.forEach(s=>{
+cards+=`<div class="card">
+<h3>${AppData.settings.centerName}</h3>
+<div class="grp">${groupName(s.groupId)}</div>
+<div class="pname">${s.name}</div>
+<div class="pg">${s.paymentType==='session'?'دفع بالحصة ('+fmt(AppData.settings.sessionFee)+' ج.م / حصة)':'اشتراك شهري'}</div>
+<svg id="bc-${s.id}"></svg>
+<div class="pf">بطاقة حضور الطالب — امسح الباركود عند الحضور</div>
+</div>`;
+scripts+=`try{JsBarcode('#bc-${s.id}','${s.code}',{format:'CODE128',width:1.6,height:42,displayValue:true,fontSize:13,margin:2})}catch(e){};`});
+if(openPrintWindow(`<div class="cards">${cards}</div>`,scripts))showToast('جاري تجهيز الكروت للطباعة 🖨️')}
+
+function printStudentCard(id){const s=studentById(id);if(s)printCardsNow([s])}
+function printAllCards(){printCardsNow(AppData.students)}
+function printReport(html){openPrintWindow(html,'')}
+
+/* ============ LOGIN ============ */
+function login(){
+const username=$('loginUser').value,password=$('loginPassword').value,err=$('loginError'),txt=$('errorText');
+if(!username){txt.textContent='⚠️ الرجاء اختيار المستخدم';err.style.display='block';return}
+const user=Users[username];
+if(!user){txt.textContent='❌ المستخدم غير موجود';err.style.display='block';return}
+if(user.password===password){AppData.currentUser={id:username,name:user.name,role:user.role,icon:user.icon};saveData();err.style.display='none';updateUI();$('loginPage').style.display='none';$('appContainer').style.display='block';renderAll();showToast('أهلاً بك، '+user.name+' 👋')}
+else{txt.textContent='❌ كلمة المرور غير صحيحة';err.style.display='block'}}
+function logout(){AppData.currentUser=null;saveData();$('appContainer').style.display='none';$('loginPage').style.display='flex';$('loginPassword').value='';$('loginUser').value='';$('loginError').style.display='none'}
+function updateUI(){const u=AppData.currentUser;if(!u)return;$('userNameDisplay').textContent=u.name;$('userRoleDisplay').textContent=u.role==='مدير'?'مدير النظام':u.role;$('userAvatar').textContent=u.icon;$('roleBadge').innerHTML=`<i class="fas ${u.role==='مدير'?'fa-crown':'fa-user'}"></i> ${u.role}`;$('currentUserDisplay').textContent=u.name}
+
+/* ============ DEMO DATA ============ */
+function seedDemo(){
+if(AppData.seeded)return;
+const d=n=>{const x=new Date();x.setDate(x.getDate()-n);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')};
+AppData.stages=[{id:1,name:'الصف الأول الثانوي',description:'رياضيات • فيزياء • كيمياء'},{id:2,name:'الصف الثاني الثانوي',description:'رياضيات • فيزياء'},{id:3,name:'الصف الثالث الثانوي',description:'رياضيات (لغات)'}];
+AppData.groups=[
+{id:1,name:'مجموعة A - رياضيات',stageId:1,teacher:'مستر علاء',capacity:20,days:'السبت + الثلاثاء',time:'4:00 - 6:00 م',price:1200},
+{id:2,name:'مجموعة B - فيزياء',stageId:1,teacher:'مستر علاء',capacity:15,days:'الأحد + الأربعاء',time:'6:00 - 8:00 م',price:1000},
+{id:3,name:'مجموعة C - رياضيات',stageId:2,teacher:'مستر علاء',capacity:18,days:'الاثنين + الخميس',time:'4:00 - 6:00 م',price:1400}];
+const names=['محمد أحمد عبدالله','يوسف إبراهيم حسن','مريم خالد سعيد','حبيبة أشرف فؤاد','عمر طارق مجدي','نور الدين سامي','ملك عصام رشاد','أحمد ياسر عادل','سلمى مدحت جمال','زياد هاني فتحي'];
+AppData.students=names.map((n,i)=>({id:10+i,name:n,phone:'010'+(10000000+i*1234567),parentPhone:'011'+(20000000+i*7654321),groupId:(i%3)+1,code:'AL'+String(i+1).padStart(3,'0'),status:'active',joinDate:d(60-i*5),address:'',paymentType:i%3===0?'session':'monthly'}));
+AppData.nextStudentCode=11;
+AppData.attendance=[];
+AppData.students.forEach((s,idx)=>{for(let k=0;k<6;k++){AppData.attendance.push({id:AppData.nextId++,studentId:s.id,date:d(k*2+1),status:(idx+k)%7===0?'absent':'present',method:'manual'})}});
+AppData.payments=[];
+const methods=['نقدي','فودافون كاش','انستا باي'];
+AppData.students.forEach((s,i)=>{
+if(s.paymentType==='session'){AppData.attendance.filter(a=>a.studentId==s.id&&a.status==='present').forEach(a=>AppData.payments.push({id:AppData.nextId++,studentId:s.id,amount:AppData.settings.sessionFee,date:a.date,method:'نقدي',notes:'دفع حصة (حضور)',type:'session'}))}
+else{AppData.payments.push({id:AppData.nextId++,studentId:s.id,amount:600,date:d(30-(i%5)*3),method:methods[i%3],notes:'دفعة أولى',type:'subscription'});
+if(i%2===0)AppData.payments.push({id:AppData.nextId++,studentId:s.id,amount:600,date:d(5+(i%4)),method:methods[(i+1)%3],notes:'دفعة ثانية',type:'subscription'})}});
+AppData.books=[
+{id:1,title:'ملزمة الرياضيات - الترم الأول',stageId:1,price:150,stock:45,author:'مستر علاء الحفنى'},
+{id:2,title:'ملزمة الفيزياء - الترم الأول',stageId:1,price:120,stock:30,author:'مستر علاء الحفنى'},
+{id:3,title:'بنك الأسئلة - رياضيات لغات',stageId:3,price:200,stock:20,author:'مستر علاء الحفنى'}];
+AppData.bookSales=[{id:AppData.nextId++,bookId:1,studentId:10,qty:2,date:d(20),unitPrice:150},{id:AppData.nextId++,bookId:2,studentId:13,qty:1,date:d(12),unitPrice:120},{id:AppData.nextId++,bookId:1,studentId:16,qty:1,date:d(4),unitPrice:150}];
+AppData.bookSales.forEach(bs=>AppData.payments.push({id:AppData.nextId++,studentId:bs.studentId,amount:bs.qty*bs.unitPrice,date:bs.date,method:'نقدي',notes:'بيع ملزمة: '+(AppData.books.find(b=>b.id==bs.bookId)||{}).title,type:'book'}));
+AppData.expenses=[
+{id:AppData.nextId++,title:'إيجار المكان - الشهر الحالي',amount:3000,date:d(10),category:'إيجار'},
+{id:AppData.nextId++,title:'شراء ملازم من المطبعة',amount:1500,date:d(7),category:'مشتريات ملازم'},
+{id:AppData.nextId++,title:'فاتورة كهرباء ومياه',amount:450,date:d(5),category:'كهرباء ومياه'}];
+AppData.bookings=[
+{id:90,name:'كريم ماهر شعبان',phone:'01012345678',parentPhone:'01123456789',address:'',stageId:1,groupId:2,paymentType:'monthly',notes:'يريد الحضور بداية من الأسبوع القادم',date:d(1),status:'pending'},
+{id:91,name:'جنى عمرو صلاح',phone:'01298765432',parentPhone:'01087654321',address:'',stageId:2,groupId:3,paymentType:'session',notes:'',date:d(0),status:'pending'}];
+AppData.seeded=true;saveData()}
+
+/* ============ NAVIGATION ============ */
+function showSection(name){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+const sec=$('section-'+name);if(sec)sec.classList.add('active');
+document.querySelectorAll('.sidebar-menu a').forEach(a=>a.classList.toggle('active',a.dataset.section===name))}
+document.querySelectorAll('.sidebar-menu a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();showSection(a.dataset.section)}));
+
+/* ============ HASH ROUTING ============ */
+window.addEventListener('hashchange',handleHash);
+function handleHash(){
+const isBooking=location.hash.startsWith('#booking');
+ $('publicBookingPage').style.display=isBooking?'flex':'none';
+if(isBooking){$('loginPage').style.display='none';$('appContainer').style.display='none';initPublicBooking()}
+else{if(AppData.currentUser){$('appContainer').style.display='block';renderAll()}else $('loginPage').style.display='flex'}}
+function getBookingLink(){const pub=(AppData.settings&&AppData.settings.bookingPublicUrl||'').trim();const base=pub?pub.replace(/#.*$/,''):location.href.split('#')[0];return base+'#booking='+AppData.bookingToken}
+function previewBookingPage(){location.hash='booking='+AppData.bookingToken}
+function exitPublicBooking(){if(location.hash)location.hash='';else handleHash()}
+function scrollToPbForm(){const el=$('pbFormSection');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+
+/* ============ PUBLIC BOOKING ============ */
+function initPublicBooking(){
+ $('pbPreviewNote').style.display=AppData.currentUser?'flex':'none';
+ $('pbStage').innerHTML='<option value="">-- اختر المرحلة --</option>'+AppData.stages.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+ $('bookingForm').style.display='';$('bookingSuccess').style.display='none';
+['pbName','pbPhone','pbParent','pbAddress','pbNotes'].forEach(id=>{if($(id))$(id).value=''});
+document.querySelectorAll('#bookingForm .form-group input').forEach(i=>i.classList.remove('err'));
+AppData.selectedGroupId=null;AppData.selectedPayType='monthly';
+document.querySelectorAll('.paytype').forEach((el,i)=>el.classList.toggle('selected',i===0));
+updateBookingGroups();
+if(AppData.currentUser)$('publicBookingPage').scrollTop=0}
+function updateBookingGroups(){
+const sid=$('pbStage').value,box=$('pbGroups');
+AppData.selectedGroupId=null;
+if(!sid){box.innerHTML='<p class="pb-hint">اختر المرحلة أولاً لعرض المجموعات المتاحة</p>';return}
+const groups=AppData.groups.filter(g=>g.stageId==sid);
+box.innerHTML=groups.map(g=>{
+const seats=g.capacity-groupStudents(g.id).length,full=seats<=0;
+return`<div class="pb-group ${full?'full':''}" onclick="selectBookingGroup(${g.id},this)">
+<div class="pbg-head"><i class="fas fa-users"></i><b>${g.name}</b></div>
+<div class="pbg-info"><span><i class="fas fa-calendar"></i> ${g.days}</span><span><i class="fas fa-clock"></i> ${g.time}</span></div>
+<div class="pbg-foot"><span class="pbg-price">${money(g.price)} شهرياً</span><span class="pbg-seats">${full?'مكتملة 🔒':seats+' مقعد متاح'}</span></div></div>`}).join('')||'<p class="pb-hint">لا توجد مجموعات متاحة لهذه المرحلة حالياً</p>'}
+function selectBookingGroup(id,el){if(el.classList.contains('full'))return;document.querySelectorAll('.pb-group').forEach(g=>g.classList.remove('selected'));el.classList.add('selected');AppData.selectedGroupId=id}
+function selectPayType(t,el){document.querySelectorAll('.paytype').forEach(p=>p.classList.remove('selected'));el.classList.add('selected');AppData.selectedPayType=t}
+function submitBooking(e){
+e.preventDefault();
+const name=$('pbName'),phone=$('pbPhone');
+let ok=true;
+[name,phone].forEach(i=>i.classList.remove('err'));
+if(name.value.trim().length<5){name.classList.add('err');ok=false}
+if(!/^01[0-9]{8,9}$/.test(phone.value.trim())){phone.classList.add('err');ok=false}
+if(!ok){showToast('من فضلك أكمل البيانات المطلوبة بشكل صحيح','error');return}
+if(!$('pbStage').value){showToast('اختر المرحلة الدراسية','error');return}
+if(!AppData.selectedGroupId){showToast('اختر المجموعة المناسبة لك','error');return}
+const bk={id:AppData.nextId++,name:name.value.trim(),phone:phone.value.trim(),parentPhone:$('pbParent').value.trim(),address:$('pbAddress').value.trim(),stageId:+$('pbStage').value,groupId:AppData.selectedGroupId,paymentType:AppData.selectedPayType,notes:$('pbNotes').value.trim(),date:todayStr(),status:'pending'};
+AppData.bookings.unshift(bk);saveData();
+const g=AppData.groups.find(x=>x.id==bk.groupId);
+ $('bookingForm').style.display='none';$('bookingSuccess').style.display='block';
+ $('reqCode').textContent='REQ-'+bk.id;
+ $('pbsSummary').innerHTML=`
+<div><span>الاسم</span><b>${bk.name}</b></div>
+<div><span>الهاتف</span><b class="mono">${bk.phone}</b></div>
+<div><span>المجموعة</span><b>${g?g.name:'—'}</b></div>
+<div><span>الموعد</span><b>${g?g.days+' — '+g.time:'—'}</b></div>
+<div><span>الرسوم</span><b>${g?money(g.price)+' / شهر':'—'}</b></div>
+<div><span>نظام الدفع</span><b>${bk.paymentType==='session'?'دفع بالحصة ('+money(AppData.settings.sessionFee)+' / حصة)':'اشتراك شهري'}</b></div>`;
+beep(true);
+/* زر واتساب: الطالب يبعت الطلب لمستر علاء فوراً */
+const wa=AppData.settings.whatsapp;
+if(wa){
+const msg='🎓 *طلب حجز جديد — '+AppData.settings.centerName+'*\n\n'+
+'👤 الاسم: '+bk.name+'\n'+
+'📱 هاتف الطالب: '+bk.phone+'\n'+
+(bk.parentPhone?'👨‍👩‍👦 هاتف ولي الأمر: '+bk.parentPhone+'\n':'')+
+'📚 المرحلة: '+stageName(bk.stageId)+'\n'+
+'👥 المجموعة: '+(g?g.name:'—')+'\n'+
+'📅 الموعد: '+(g?g.days+' — '+g.time:'—')+'\n'+
+'💰 نظام الدفع: '+(bk.paymentType==='session'?'بالحصة ('+AppData.settings.sessionFee+' ج.م/حصة)':'اشتراك شهري ('+(g?g.price:'—')+' ج.م)')+'\n'+
+'🏠 العنوان: '+(bk.address||'—')+'\n'+
+(bk.notes?'📝 ملاحظات: '+bk.notes+'\n':'')+
+'🔖 رقم الطلب: REQ-'+bk.id;
+const waBtn=document.createElement('button');
+waBtn.className='pb-again';
+waBtn.style.background='linear-gradient(135deg,#25d366,#128c7e)';
+waBtn.style.borderColor='transparent';
+waBtn.innerHTML='<i class="fab fa-whatsapp"></i> إرسال الطلب لمستر علاء على واتساب';
+waBtn.onclick=()=>window.open('https://wa.me/2'+wa+'?text='+encodeURIComponent(msg),'_blank');
+ $('bookingSuccess').insertBefore(waBtn,$('pb-again'));}
+setTimeout(()=>{const sc=$('bookingSuccess');if(sc)sc.scrollIntoView({behavior:'smooth',block:'center'})},150)}
+
+/* ============ BOOKING ADMIN ============ */
+function generateBookingLink(){AppData.bookingToken='ALAA'+Math.random().toString(36).replace(/[^A-Z0-9]/gi,'').substring(0,6).toUpperCase();saveData();renderBooking();showToast('تم تجديد رابط الحجز ✅')}
+function copyBookingLink(){const link=getBookingLink();
+if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(link).then(()=>showToast('تم نسخ الرابط ✅')).catch(()=>fallbackCopy(link));else fallbackCopy(link)}
+function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast('تم نسخ الرابط ✅')}catch(e){showToast('انسخ الرابط يدوياً','info')}ta.remove()}
+function shareWhatsApp(){window.open('https://wa.me/?text='+encodeURIComponent('احجز دروسك مع مستر علاء الحفنى 🎓\n'+getBookingLink()),'_blank')}
+function showBookingQR(){
+openCustomModal('QR Code — رابط الحجز',`<div style="text-align:center"><div id="qrBox" style="display:inline-block;background:#fff;padding:14px;border-radius:16px"></div><p class="mono" style="margin-top:14px;color:rgba(255,255,255,.6);font-size:13px;word-break:break-all">${getBookingLink()}</p><p class="f-hint">وجّه كاميرا الموبايل على الكود ليفتح الطالب صفحة الحجز مباشرة</p></div>`);
+try{new QRCode($('qrBox'),{text:getBookingLink(),width:220,height:220,colorDark:'#0f172a'})}catch(e){}}
+function renderBooking(){
+ $('bookingLink').textContent=getBookingLink();
+ $('bookingCount').textContent=AppData.bookings.length;
+const badges={pending:['status-suspended','قيد المراجعة'],approved:['status-active','تم القبول ✓'],rejected:['status-deleted','مرفوض']};
+ $('bookingRequestsList').innerHTML=AppData.bookings.map(b=>{
+const[cls,txt]=badges[b.status];
+let actions='';
+if(b.status==='pending')actions=`<button class="btn btn-success btn-sm" onclick="approveBooking(${b.id})"><i class="fas fa-check"></i> قبول وإضافة الطالب</button>
+<button class="btn btn-danger btn-sm" onclick="rejectBooking(${b.id})"><i class="fas fa-times"></i> رفض</button>
+<a class="btn btn-success btn-sm" style="text-decoration:none" target="_blank" href="https://wa.me/2${b.phone}"><i class="fab fa-whatsapp"></i></a>
+<a class="btn btn-info btn-sm" style="text-decoration:none" href="tel:${b.phone}"><i class="fas fa-phone"></i></a>`;
+else if(b.status==='approved')actions=`<span style="font-size:12.5px;color:#34d399;font-weight:700"><i class="fas fa-user-check"></i> تمت الإضافة للمجموعة</span>`;
+else actions=`<button class="btn btn-danger btn-sm" onclick="deleteBooking(${b.id})"><i class="fas fa-trash"></i> حذف</button>`;
+return`<div class="booking-request ${b.status}">
+<div class="br-main">
+<div class="br-name"><i class="fas fa-user-plus"></i>${b.name}</div>
+<div class="br-meta">
+<span><i class="fas fa-phone"></i> ${b.phone}</span>
+ ${b.parentPhone?`<span><i class="fas fa-mobile-screen"></i> ولي الأمر: ${b.parentPhone}</span>`:''}
+<span><i class="fas fa-users"></i> ${groupName(b.groupId)}</span>
+<span><i class="fas fa-coins"></i> ${b.paymentType==='session'?'دفع بالحصة':'اشتراك شهري'}</span>
+<span><i class="fas fa-calendar"></i> ${fmtDate(b.date)}</span></div>
+ ${b.notes?`<div class="br-notes"><i class="fas fa-comment"></i> ${b.notes}</div>`:''}</div>
+<div class="br-side"><span class="status-badge ${cls}">${txt}</span><div class="br-actions">${actions}</div></div>
+</div>`}).join('')||'<p class="empty">لا توجد طلبات حجز — شارك الرابط مع الطلاب!</p>'}
+function approveBooking(id){
+const b=AppData.bookings.find(x=>x.id==id);if(!b)return;
+const g=AppData.groups.find(x=>x.id==b.groupId);
+if(g&&groupStudents(g.id).length>=g.capacity)return showToast('المجموعة مكتملة العدد!','error');
+const code='AL'+String(AppData.nextStudentCode++).padStart(3,'0');
+const ns={id:AppData.nextId++,name:b.name,phone:b.phone,parentPhone:b.parentPhone,address:b.address||'',groupId:b.groupId,code,status:'active',joinDate:todayStr(),paymentType:b.paymentType||'monthly',fromBooking:true};
+AppData.students.unshift(ns);
+b.status='approved';saveData();renderAll();
+showToast(`تم قبول ${b.name} وإضافته للمجموعة بكود ${code} 🎉`);
+printStudentCard(ns.id)}
+function rejectBooking(id){const b=AppData.bookings.find(x=>x.id==id);if(b)b.status='rejected';saveData();renderAll();showToast('تم رفض الطلب','info')}
+function deleteBooking(id){AppData.bookings=AppData.bookings.filter(b=>b.id!=id);saveData();renderAll();showToast('تم حذف الطلب 🗑️')}
+
+/* ============ ATTENDANCE CORE ============ */
+function markAttendance(sid,date,status,method){
+AppData.attendance=AppData.attendance.filter(a=>!(a.studentId==sid&&a.date===date));
+AppData.attendance.push({id:AppData.nextId++,studentId:sid,date,status,method:method||'manual'});
+if(status==='present'){
+const s=studentById(sid);
+if(s&&s.paymentType==='session'){
+const exists=AppData.payments.some(p=>p.studentId==sid&&p.type==='session'&&p.date===date);
+if(!exists){AppData.payments.unshift({id:AppData.nextId++,studentId:sid,amount:AppData.settings.sessionFee,date,method:'نقدي',notes:'دفع حصة تلقائي (تسجيل حضور)',type:'session'})}}}}
+function processCode(code,status='present'){
+code=(code||'').trim().toUpperCase();
+const s=AppData.students.find(x=>x.code.toUpperCase()===code);
+if(!s)return{ok:false,msg:'❌ كود غير معروف: '+code};
+const ex=AppData.attendance.find(a=>a.studentId==s.id&&a.date===todayStr());
+if(ex&&ex.status===status)return{ok:false,msg:'⚠️ '+s.name+' مسجل '+(status==='present'?'حضوره':'غيابه')+' اليوم بالفعل',info:true};
+markAttendance(s.id,todayStr(),status,'barcode');
+saveData();renderAll();
+const payMsg=status==='present'&&s.paymentType==='session'?' — تم تسجيل دفع الحصة في الخزينة 💰':'';
+return{ok:true,msg:(status==='present'?'✅ '+s.name+' — حضور مسجل':'❌ '+s.name+' — غياب مسجل')+payMsg}}
+
+/* ============ ATTENDANCE MODES ============ */
+function switchAttMode(mode,btn){
+document.querySelectorAll('#section-attendance .tabs .tab').forEach(t=>t.classList.remove('active'));
+if(btn)btn.classList.add('active');
+ $('attManual').style.display=mode==='manual'?'block':'none';
+ $('attBarcode').style.display=mode==='barcode'?'block':'none';
+ $('attCode').style.display=mode==='code'?'block':'none';
+if(mode==='code'){const ci=$('codeInput');if(ci){ci.value='';ci.focus()}}
+if(mode!=='barcode')stopCamera()}
+let scanScanner=null;
+function startCamera(){
+stopCamera();
+try{
+scanScanner=new Html5Qrcode('cameraReader');
+const formats=[Html5QrcodeSupportedFormats.CODE_128,Html5QrcodeSupportedFormats.CODE_39,Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,Html5QrcodeSupportedFormats.QR_CODE];
+scanScanner.start({facingMode:'environment'},{fps:10,qrbox:{width:280,height:180},formatsToSupport:formats},
+txt=>{const r=processCode(txt,'present');beep(r.ok);showScanFeedback(r.msg,r.ok?'ok':r.info?'info':'err')},
+()=>{});
+showToast('تم تشغيل الكاميرا — امسح كارت الطالب 📷','info')}
+catch(e){showToast('تعذر تشغيل الكاميرا — تأكد من السماح بالوصول للكاميرا','error')}}
+function stopCamera(){
+if(scanScanner){try{scanScanner.stop().then(()=>{try{scanScanner.clear()}catch(e){}scanScanner=null}).catch(()=>{scanScanner=null})}catch(e){scanScanner=null}}}
+function showScanFeedback(msg,cls){const el=$('scanFeedback');el.className='scan-feedback '+cls;el.innerHTML=msg;setTimeout(()=>{el.className='scan-feedback info';el.innerHTML='<i class="fas fa-barcode"></i> جاهز للمسح التالي...'},3000)}
+function openScannerModal(){
+openCustomModal('المسح بالباركود',`<div class="scan-box"><div id="cameraReaderM"></div><div id="scanFeedbackM" class="scan-feedback info"><i class="fas fa-barcode"></i> جاري تشغيل الكاميرا...</div>
+<p class="f-hint" style="margin-top:14px"><i class="fas fa-lightbulb"></i> عند المسح يُسجَّل الحضور فوراً — ولو الطالب "بالحصة" يتسجل الدفع تلقائياً في الخزينة</p></div>`);
+try{
+const formats=[Html5QrcodeSupportedFormats.CODE_128,Html5QrcodeSupportedFormats.CODE_39,Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.QR_CODE];
+scanScanner=new Html5Qrcode('cameraReaderM');
+scanScanner.start({facingMode:'environment'},{fps:10,qrbox:{width:260,height:170},formatsToSupport:formats},
+txt=>{const r=processCode(txt,'present');beep(r.ok);const el=$('scanFeedbackM');if(el){el.className='scan-feedback '+(r.ok?'ok':r.info?'info':'err');el.innerHTML=r.msg}setTimeout(()=>{if(el){el.className='scan-feedback info';el.innerHTML='<i class="fas fa-barcode"></i> جاهز للمسح التالي...'}},3000)},
+()=>{})}catch(e){const el=$('scanFeedbackM');if(el){el.className='scan-feedback err';el.innerHTML='تعذر تشغيل الكاميرا — استخدم قسم الحضور بالكود'}}}
+function processCodeEntry(){
+const inp=$('codeInput');const code=inp.value;
+if(!code.trim())return;
+const status=document.querySelector('input[name="codeStatus"]:checked').value;
+const r=processCode(code,status);beep(r.ok);
+const fb=$('codeFeedback');fb.style.display='flex';fb.className='scan-feedback '+(r.ok?'ok':r.info?'info':'err');fb.innerHTML=r.msg;
+inp.value='';inp.focus();
+setTimeout(()=>{fb.style.display='none'},3500)}
+
+/* ============ مسح كود داخل خانة (تسجيل الطالب) ============ */
+let fieldScanner=null,fieldScanTarget=null;
+function scanIntoField(inputId){
+fieldScanTarget=inputId;
+ $('scanModalBody').innerHTML=`<div class="scan-box">
+<div id="fieldScanReader"></div>
+<div id="fieldScanFb" class="scan-feedback info"><i class="fas fa-barcode"></i> وجّه الكاميرا على باركود الكارت</div>
+<p class="f-hint" style="margin-top:12px"><i class="fas fa-lightbulb"></i> بعد المسح يتم إدخال الكود تلقائياً في خانة الكود</p>
+<div style="display:flex;gap:10px;justify-content:center;margin-top:10px">
+<button class="btn btn-danger" onclick="closeScanOverlay()"><i class="fas fa-times"></i> إلغاء</button></div></div>`;
+ $('scanOverlay').classList.add('active');
+try{
+const formats=[Html5QrcodeSupportedFormats.CODE_128,Html5QrcodeSupportedFormats.CODE_39,Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,Html5QrcodeSupportedFormats.QR_CODE];
+fieldScanner=new Html5Qrcode('fieldScanReader');
+fieldScanner.start({facingMode:'environment'},{fps:10,qrbox:{width:260,height:170},formatsToSupport:formats},
+txt=>{
+beep(true);
+const code=(txt||'').trim().toUpperCase();
+stopFieldScanner();
+if(fieldScanTarget&&$(fieldScanTarget))$(fieldScanTarget).value=code;
+closeScanOverlay();
+showToast('تم إدخال الكود: '+code+' ✅')},
+()=>{})}
+catch(e){const fb=$('fieldScanFb');if(fb){fb.className='scan-feedback err';fb.innerHTML='تعذر تشغيل الكاميرا — اكتب الكود يدوياً من على الكارت'}}}
+function stopFieldScanner(){
+if(fieldScanner){try{fieldScanner.stop().then(()=>{try{fieldScanner.clear()}catch(e){}fieldScanner=null}).catch(()=>{fieldScanner=null})}catch(e){fieldScanner=null}}}
+function closeScanOverlay(){stopFieldScanner();$('scanOverlay').classList.remove('active');$('scanModalBody').innerHTML='';fieldScanTarget=null}
+
+/* ===== الحضور اليدوي ===== */
+function populateAttGroups(){
+const sel=$('attGroup');if(!sel)return;
+const cur=sel.value;
+sel.innerHTML='<option value="">-- اختر المجموعة --</option>'+AppData.groups.map(g=>`<option value="${g.id}">${g.name}</option>`).join('');
+if(cur&&AppData.groups.some(g=>String(g.id)===cur))sel.value=cur}
+function renderAttList(){
+const gid=$('attGroup')?$('attGroup').value:'';
+const date=$('attDate')?$('attDate').value||todayStr():todayStr();
+if($('attDate'))$('attDate').value=date;
+const listEl=$('attStudentsList');if(!listEl)return;
+const list=gid?groupStudents(gid):[];
+listEl.innerHTML=list.map(s=>{
+const ex=AppData.attendance.find(a=>a.studentId==s.id&&a.date===date);
+const st=ex?ex.status:'';
+return`<div class="att-row" data-sid="${s.id}" data-status="${st}">
+<span class="att-name">${s.name} <small class="mono" style="color:rgba(255,255,255,.35)">${s.code}</small> ${s.paymentType==='session'?'<span class="status-badge pt-ses" style="font-size:10px;padding:2px 8px">بالحصة</span>':'<span class="status-badge pt-sub" style="font-size:10px;padding:2px 8px">شهري</span>'}</span>
+<div style="display:flex;gap:6px">
+<button type="button" class="att-btn ${st==='present'?'on-p':''}" onclick="setAttRow(this,'present')"><i class="fas fa-check"></i> حاضر</button>
+<button type="button" class="att-btn ${st==='absent'?'on-a':''}" onclick="setAttRow(this,'absent')"><i class="fas fa-times"></i> غائب</button></div>
+</div>`}).join('')||'<p class="empty">لا يوجد طلاب في هذه المجموعة</p>'}
+function setAttRow(el,status){const row=el.closest('.att-row');row.dataset.status=status;row.querySelectorAll('.att-btn').forEach(b=>b.classList.remove('on-p','on-a'));el.classList.add(status==='present'?'on-p':'on-a')}
+function attMarkAll(status){document.querySelectorAll('#attStudentsList .att-row').forEach(r=>{r.dataset.status=status;r.querySelectorAll('.att-btn').forEach(b=>{b.classList.remove('on-p','on-a');if((status==='present'&&b.innerHTML.includes('fa-check'))||(status==='absent'&&b.innerHTML.includes('fa-times')))b.classList.add(status==='present'?'on-p':'on-a')})})}
+function saveAttList(){
+const date=$('attDate').value||todayStr();
+const rows=[...document.querySelectorAll('#attStudentsList .att-row')].filter(r=>r.dataset.status);
+if(!rows.length)return showToast('اختر المجموعة وحدد حالة الطلاب أولاً','error');
+let paid=0;
+rows.forEach(r=>{const s=studentById(+r.dataset.sid);markAttendance(+r.dataset.sid,date,r.dataset.status,'manual');if(r.dataset.status==='present'&&s.paymentType==='session')paid++});
+saveData();renderAll();
+showToast(`تم حفظ حضور ${rows.length} طالب ✅${paid?` — وسُجِّل دفع ${paid} حصة في الخزينة 💰`:''}`)}
+function gotoGroupAttendance(gid){
+showSection('attendance');
+switchAttMode('manual',document.querySelector('#section-attendance .tabs .tab'));
+populateAttGroups();
+ $('attGroup').value=String(gid);
+renderAttList()}
+function renderAttendance(){
+const recs=[...AppData.attendance].sort((a,b)=>(b.date||'').localeCompare(a.date||'')).slice(0,80);
+const methods={manual:'يدوي',barcode:'باركود',code:'كود'};
+ $('attendanceTableBody').innerHTML=recs.map((a,i)=>{
+const s=studentById(a.studentId);
+return`<tr><td>${i+1}</td><td>${s?s.name:'—'}</td><td>${s?groupName(s.groupId):'—'}</td>
+<td><span class="status-badge ${a.status==='present'?'status-present':'status-absent'}">${a.status==='present'?'<i class="fas fa-check"></i> حاضر':'<i class="fas fa-times"></i> غائب'}</span></td>
+<td>${fmtDate(a.date)}</td><td><span class="status-badge pt-ses">${methods[a.method]||'يدوي'}</span></td>
+<td><button class="btn btn-danger btn-sm" onclick="deleteAtt(${a.id})"><i class="fas fa-trash"></i></button></td></tr>`}).join('')||'<tr><td colspan="7" class="empty">لا توجد سجلات حضور بعد</td></tr>'}
+function deleteAtt(id){confirmAction('حذف سجل الحضور هذا؟ (لن تُحذف الدفعة المرتبطة به)',()=>{AppData.attendance=AppData.attendance.filter(a=>a.id!=id);saveData();renderAll();showToast('تم الحذف')})}
+
+/* ============ DASHBOARD ============ */
+function renderDashboard(){
+ $('statStages').textContent=AppData.stages.length;
+ $('statGroups').textContent=AppData.groups.length;
+ $('statStudents').textContent=AppData.students.length;
+ $('statTreasury').textContent=fmt(trBalance());
+renderRevenueChart();
+ $('dashboardGroups').innerHTML=AppData.groups.map(g=>{
+const st=groupStudents(g.id).length,pct=Math.min(100,Math.round(st/g.capacity*100));
+return`<div class="glass-card">
+<div class="card-header"><h4>${g.name}</h4><span class="status-badge ${pct>=90?'status-suspended':'status-active'}">${st}/${g.capacity}</span></div>
+<div class="dg-meta"><span><i class="fas fa-layer-group"></i> ${stageName(g.stageId)}</span><span><i class="fas fa-user-tie"></i> ${g.teacher}</span><span><i class="fas fa-coins"></i> ${money(g.price)}</span></div>
+<div class="progress"><div class="progress-fill" style="width:${pct}%"></div></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn btn-info btn-sm" onclick="showGroupReport(${g.id})"><i class="fas fa-file-alt"></i> تقرير</button>
+<button class="btn btn-success btn-sm" onclick="gotoGroupAttendance(${g.id})"><i class="fas fa-clipboard-check"></i> حضور</button></div>
+</div>`}).join('')||'<p class="empty">لا توجد مجموعات — أضف مجموعة جديدة</p>';
+const pending=AppData.bookings.filter(b=>b.status==='pending');
+ $('pendingCount').textContent=pending.length;
+ $('dashBookings').innerHTML=pending.slice(0,5).map(b=>`
+<div class="mini-booking" onclick="showSection('booking')">
+<i class="fas fa-user-plus"></i>
+<div><b>${b.name}</b><span>${groupName(b.groupId)}</span></div>
+<span class="status-badge status-suspended">جديد</span></div>`).join('')||'<p class="empty">لا توجد طلبات حجز جديدة</p>';
+const bkRev=AppData.bookSales.reduce((a,s)=>a+s.qty*s.unitPrice,0);
+ $('booksMiniStats').innerHTML=`
+<div><b>${AppData.books.length}</b><span>ملزمة</span></div>
+<div><b>${AppData.books.reduce((a,b)=>a+b.stock,0)}</b><span>نسخ بالمخزن</span></div>
+<div><b>${fmt(bkRev)}</b><span>مبيعات (ج.م)</span></div>`;
+ $('booksMiniList').innerHTML=AppData.books.slice(0,3).map(b=>`<div class="debt-row" style="background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.15)">
+<span>${b.title}</span><b class="t-blue">${b.stock} نسخة</b></div>`).join('')||'<p class="empty">لا ملازم — سجّل ملازمك</p>';
+const t=todayStr();
+const tInc=AppData.payments.filter(p=>p.date===t).reduce((a,p)=>a+Number(p.amount),0);
+const tExp=AppData.expenses.filter(e=>e.date===t).reduce((a,e)=>a+Number(e.amount),0);
+const tAtt=AppData.attendance.filter(a=>a.date===t);
+const tP=tAtt.filter(a=>a.status==='present').length;
+ $('todayMiniStats').innerHTML=`
+<div><b style="color:#34d399">${fmt(tInc)}</b><span>وارد اليوم</span></div>
+<div><b>${tP}</b><span>حضور اليوم</span></div>
+<div><b style="color:#f87171">${fmt(tExp)}</b><span>مصروف اليوم</span></div>`;
+ $('todayMiniList').innerHTML=tAtt.slice(0,4).map(a=>{const s=studentById(a.studentId);return`<div class="debt-row" style="background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.12)">
+<span>${s?s.name:'—'}</span><span class="status-badge ${a.status==='present'?'status-present':'status-absent'}">${a.status==='present'?'حاضر':'غائب'}</span></div>`}).join('')||'<p class="empty">لا حضور مسجل اليوم — ابدأ من زر "حضور بالباركود" 🔑</p>'}
+function renderRevenueChart(){
+const now=new Date(),data=[];
+for(let i=5;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);
+const key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+const sum=AppData.payments.filter(p=>(p.date||'').slice(0,7)===key).reduce((a,p)=>a+Number(p.amount),0);
+data.push({label:d.toLocaleDateString('ar-EG',{month:'long'}),sum})}
+const max=Math.max(...data.map(x=>x.sum),1);
+ $('revenueChart').innerHTML=data.map(x=>`<div class="rc-bar" style="height:${Math.max(5,x.sum/max*100)}%">
+<span class="rc-val">${x.sum?fmt(x.sum):''}</span><span class="rc-lbl">${x.label}</span></div>`).join('')}
+
+/* ============ TABLES ============ */
+function renderStages(){
+ $('stagesTableBody').innerHTML=AppData.stages.map((st,i)=>{
+const gs=AppData.groups.filter(g=>g.stageId==st.id);
+const sc=gs.reduce((a,g)=>a+groupStudents(g.id).length,0);
+return`<tr><td>${i+1}</td><td><b>${st.name}</b></td><td style="color:rgba(255,255,255,.55)">${st.description||'—'}</td><td>${gs.length}</td><td>${sc}</td>
+<td><button class="btn btn-accent btn-sm" onclick="openModal('stage',${st.id})"><i class="fas fa-edit"></i></button>
+<button class="btn btn-danger btn-sm" onclick="deleteItem('stage',${st.id})"><i class="fas fa-trash"></i></button></td></tr>`}).join('')||'<tr><td colspan="6" class="empty">لا توجد مراحل — أضف مرحلة جديدة</td></tr>'}
+function renderGroups(){
+ $('groupsTableBody').innerHTML=AppData.groups.map((g,i)=>{
+const st=groupStudents(g.id).length;
+return`<tr><td>${i+1}</td><td><b>${g.name}</b></td><td>${stageName(g.stageId)}</td><td>${st} / ${g.capacity}</td><td>${g.teacher}</td><td style="font-size:12px">${g.days}<br>${g.time}</td><td class="t-gold">${money(g.price)}</td>
+<td><button class="btn btn-accent btn-sm" onclick="openModal('group',${g.id})"><i class="fas fa-edit"></i></button>
+<button class="btn btn-danger btn-sm" onclick="deleteItem('group',${g.id})"><i class="fas fa-trash"></i></button></td></tr>`}).join('')||'<tr><td colspan="8" class="empty">لا توجد مجموعات</td></tr>'}
+function renderGroupDetails(){
+ $('groupsFullContainer').innerHTML=AppData.groups.map(g=>{
+const sts=groupStudents(g.id);
+return`<div class="group-full-details">
+<div class="group-title">${g.name} <span class="g-stage">— ${stageName(g.stageId)}</span></div>
+<div class="group-meta">
+<span><i class="fas fa-user-tie"></i> ${g.teacher}</span><span><i class="fas fa-calendar"></i> ${g.days}</span>
+<span><i class="fas fa-clock"></i> ${g.time}</span><span><i class="fas fa-users"></i> ${sts.length}/${g.capacity}</span>
+<span><i class="fas fa-coins"></i> ${money(g.price)}</span></div>
+ ${sts.map(s=>{const r=attRate(s.id),paid=studentPaid(s.id);return`
+<div class="student-row-detail">
+<div class="sd-main"><span class="student-name">${s.name}</span><span class="sd-code">${s.code}</span>
+<span class="status-badge ${s.paymentType==='session'?'pt-ses':'pt-sub'}" style="font-size:10px;padding:2px 8px">${s.paymentType==='session'?'بالحصة':'شهري'}</span></div>
+<div class="student-stats">
+<span class="t-green"><i class="fas fa-check"></i> ${r.present}</span>
+<span class="t-red"><i class="fas fa-times"></i> ${r.absent}</span>
+<span><i class="fas fa-percentage"></i> ${r.rate}%</span>
+<span class="t-gold"><i class="fas fa-coins"></i> ${money(paid)}</span></div>
+<div class="student-actions">
+<button class="report-btn report-btn-student" onclick="studentReport(${s.id})" title="تقرير"><i class="fas fa-file-alt"></i></button>
+<button class="report-btn report-btn-student" onclick="printStudentCard(${s.id})" title="طباعة الكارت"><i class="fas fa-id-card"></i></button></div>
+</div>`}).join('')||'<p class="empty">لا يوجد طلاب في هذه المجموعة</p>'}
+<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+<button class="btn btn-success btn-sm" onclick="showGroupReport(${g.id})"><i class="fas fa-file-pdf"></i> تقرير المجموعة</button></div>
+</div>`}).join('')||'<p class="empty">لا توجد مجموعات</p>'}
+function renderStudents(){
+const q=($('studentSearch').value||'').toLowerCase(),gf=$('studentGroupFilter').value,pf=$('studentPayFilter').value;
+const cur=$('studentGroupFilter').value;
+ $('studentGroupFilter').innerHTML='<option value="">كل المجموعات</option>'+AppData.groups.map(g=>`<option value="${g.id}" ${cur==g.id?'selected':''}>${g.name}</option>`).join('');
+const list=AppData.students.filter(s=>(!q||s.name.toLowerCase().includes(q)||s.code.toLowerCase().includes(q)||(s.phone||'').includes(q))&&(!gf||s.groupId==gf)&&(!pf||s.paymentType===pf));
+ $('studentsTableBody').innerHTML=list.map((s,i)=>`
+<tr><td>${i+1}</td><td><b>${s.name}</b></td><td>${groupName(s.groupId)}</td><td><span class="mono">${s.code}</span></td>
+<td><span class="mono">${s.phone||'—'}</span></td>
+<td><span class="status-badge ${s.paymentType==='session'?'pt-ses':'pt-sub'}">${s.paymentType==='session'?'بالحصة':'شهري'}</span></td>
+<td><span class="status-badge ${s.status==='active'?'status-active':'status-suspended'}">${s.status==='active'?'نشط':'موقوف'}</span></td>
+<td><button class="report-btn report-btn-student" onclick="studentReport(${s.id})"><i class="fas fa-file-alt"></i> تقرير</button></td>
+<td><button class="btn btn-outline btn-sm" onclick="printStudentCard(${s.id})" title="كارت باركود"><i class="fas fa-id-card"></i></button></td>
+<td><button class="btn btn-accent btn-sm" onclick="openModal('student',${s.id})"><i class="fas fa-edit"></i></button>
+<button class="btn btn-danger btn-sm" onclick="deleteItem('student',${s.id})"><i class="fas fa-trash"></i></button></td></tr>`).join('')||'<tr><td colspan="10" class="empty">لا توجد نتائج</td></tr>'}
+function renderBooks(){
+const sold=AppData.bookSales.reduce((a,s)=>a+s.qty,0);
+const bkRev=AppData.bookSales.reduce((a,s)=>a+s.qty*s.unitPrice,0);
+ $('bkTitles').textContent=AppData.books.length;
+ $('bkStock').textContent=AppData.books.reduce((a,b)=>a+b.stock,0);
+ $('bkSold').textContent=sold;
+ $('bkRevenue').textContent=fmt(bkRev);
+ $('booksContainer').innerHTML=AppData.books.map(b=>{
+const bSold=AppData.bookSales.filter(s=>s.bookId==b.id).reduce((a,s)=>a+s.qty,0);
+return`<div class="glass-card">
+<div class="card-header"><h4><i class="fas fa-book"></i> ${b.title}</h4><span class="status-badge ${b.stock>0?'status-active':'status-deleted'}">${b.stock>0?b.stock+' متوفر':'نفدت'}</span></div>
+<div class="book-meta"><span><i class="fas fa-layer-group"></i> ${stageName(b.stageId)}</span><span><i class="fas fa-coins"></i> ${money(b.price)}</span><span><i class="fas fa-cart-shopping"></i> مباع: ${bSold}</span><span><i class="fas fa-pen"></i> المؤلف: ${b.author||'—'}</span></div>
+<div class="book-actions">
+<button class="btn btn-success btn-sm" ${b.stock<=0?'disabled':''} onclick="openModal('sale',${b.id})"><i class="fas fa-cart-plus"></i> بيع نسخة</button>
+<button class="btn btn-accent btn-sm" onclick="openModal('book',${b.id})"><i class="fas fa-edit"></i> تعديل</button>
+<button class="btn btn-danger btn-sm" onclick="deleteItem('book',${b.id})"><i class="fas fa-trash"></i></button></div>
+</div>`}).join('')||'<p class="empty">لا توجد ملازم — سجّل أول ملزمة</p>'}
+function renderCodes(){
+ $('codesContainer').innerHTML=AppData.students.map(s=>`
+<div class="glass-card code-card">
+<div class="code-head"><span class="student-name">${s.name}</span><span class="status-badge ${s.paymentType==='session'?'pt-ses':'pt-sub'}">${s.paymentType==='session'?'بالحصة':'شهري'}</span></div>
+<div class="barcode-wrap"><svg id="bc-${s.id}"></svg></div>
+<div class="code-foot"><span><i class="fas fa-users"></i> ${groupName(s.groupId)}</span>
+<button class="btn btn-outline btn-sm" onclick="printStudentCard(${s.id})"><i class="fas fa-print"></i> طباعة الكارت</button></div>
+</div>`).join('')||'<p class="empty">لا يوجد طلاب — سجّل طالب لإنشاء كود وباركود</p>';
+AppData.students.forEach(s=>{try{JsBarcode('#bc-'+s.id,s.code,{format:'CODE128',width:2,height:50,displayValue:true,fontSize:14,background:'#ffffff',lineColor:'#0f172a'})}catch(e){}})}
+function generateAllCodes(){renderCodes();showToast('تم تحديث جميع أكواد وباركود الطلاب ✅')}
+
+/* ============ PAYMENTS ============ */
+const payTypeBadges={subscription:['pt-sub','اشتراك شهري'],session:['pt-ses','دفع حصة'],book:['pt-book','بيع ملزمة']};
+function setPayPreset(mode,btn){
+AppData.payFilterMode=mode;
+document.querySelectorAll('#payChips .chip').forEach(c=>c.classList.remove('active'));
+if(btn)btn.classList.add('active');
+if(mode!=='custom'){$('payFrom').value='';$('payTo').value=''}
+renderPayments()}
+function payCustomChanged(){
+AppData.payFilterMode='custom';
+document.querySelectorAll('#payChips .chip').forEach(c=>c.classList.remove('active'));
+const chips=[...document.querySelectorAll('#payChips .chip')];
+const customChip=chips.find(c=>c.textContent.includes('مخصصة'));
+if(customChip)customChip.classList.add('active');
+renderPayments()}
+function resetPayFilter(){
+ $('payFrom').value='';$('payTo').value='';
+setPayPreset('all',document.querySelector('#payChips .chip'))}
+function filteredPayments(){
+const m=AppData.payFilterMode||'all';
+const t=todayStr();
+const yd=new Date();yd.setDate(yd.getDate()-1);
+const yest=yd.getFullYear()+'-'+String(yd.getMonth()+1).padStart(2,'0')+'-'+String(yd.getDate()).padStart(2,'0');
+const wd=new Date();wd.setDate(wd.getDate()-6);
+const week=wd.getFullYear()+'-'+String(wd.getMonth()+1).padStart(2,'0')+'-'+String(wd.getDate()).padStart(2,'0');
+return AppData.payments.filter(p=>{
+const pd=p.date||'';
+if(m==='today')return pd===t;
+if(m==='yesterday')return pd===yest;
+if(m==='week')return pd>=week&&pd<=t;
+if(m==='month')return pd.slice(0,7)===t.slice(0,7);
+if(m==='year')return pd.slice(0,4)===t.slice(0,4);
+if(m==='custom'){const f=$('payFrom').value,tt=$('payTo').value;return(!f||pd>=f)&&(!tt||pd<=tt)}
+return true})}
+function renderPayments(){
+const t=todayStr();
+ $('payToday').textContent=fmt(AppData.payments.filter(p=>p.date===t).reduce((a,p)=>a+Number(p.amount),0));
+ $('payMonth').textContent=fmt(AppData.payments.filter(p=>(p.date||'').slice(0,7)===monthKey()).reduce((a,p)=>a+Number(p.amount),0));
+ $('payYear').textContent=fmt(AppData.payments.filter(p=>(p.date||'').slice(0,4)===t.slice(0,4)).reduce((a,p)=>a+Number(p.amount),0));
+ $('payTotal').textContent=fmt(totalIncome());
+const recs=filteredPayments().slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+const total=recs.reduce((a,p)=>a+Number(p.amount),0);
+ $('payFilterSummary').innerHTML=`<i class="fas fa-filter"></i> نتائج الفلترة: <b>${recs.length}</b> دفعة — الإجمالي: <b>${money(total)}</b>`;
+ $('paymentsTableBody').innerHTML=recs.map((p,i)=>{
+const s=studentById(p.studentId);const[cls,txt]=payTypeBadges[p.type]||['pt-sub','دفع'];
+return`<tr><td>${i+1}</td><td>${s?s.name:'—'}</td><td>${s?groupName(s.groupId):'—'}</td>
+<td><span class="status-badge ${cls}">${txt}</span></td>
+<td class="t-gold"><b>${money(p.amount)}</b></td><td>${fmtDate(p.date)}</td><td>${p.method||'—'}</td>
+<td style="font-size:12px;color:rgba(255,255,255,.5)">${p.notes||'—'}</td>
+<td><button class="btn btn-danger btn-sm" onclick="deleteItem('payment',${p.id})"><i class="fas fa-trash"></i></button></td></tr>`}).join('')||'<tr><td colspan="9" class="empty">لا توجد دفعات في هذه الفترة</td></tr>'}
+
+/* ============ TREASURY ============ */
+function renderTreasury(){
+ $('trBalance').textContent=fmt(trBalance());
+ $('trIncome').textContent=fmt(totalIncome());
+ $('trExpenses').textContent=fmt(totalExp());
+ $('trExpCount').textContent=AppData.expenses.length;
+const byType={subscription:0,session:0,book:0};
+AppData.payments.forEach(p=>byType[p.type]=(byType[p.type]||0)+Number(p.amount));
+const max=Math.max(...Object.values(byType),1);
+const names={subscription:'اشتراكات شهرية',session:'دفع حصص',book:'مبيعات ملازم'};
+ $('trIncomeByType').innerHTML=Object.keys(byType).map(k=>`
+<div class="rev-row"><span class="rev-name">${names[k]}</span>
+<div class="progress"><div class="progress-fill" style="width:${Math.round(byType[k]/max*100)}%"></div></div>
+<b class="rev-val">${money(byType[k])}</b></div>`).join('');
+ $('expensesList').innerHTML=[...AppData.expenses].sort((a,b)=>(b.date||'').localeCompare(a.date||'')).map(e=>`
+<div class="debt-row" style="background:rgba(239,68,68,.06)">
+<span>${e.title}</span>
+<span class="status-badge status-deleted">${e.category}</span>
+<b class="t-red">${money(e.amount)}</b>
+<button class="btn btn-danger btn-sm" onclick="deleteExpense(${e.id})"><i class="fas fa-trash"></i></button></div>`).join('')||'<p class="empty">لا مصروفات مسجلة</p>'}
+function deleteExpense(id){confirmAction('حذف هذا المصروف؟',()=>{AppData.expenses=AppData.expenses.filter(e=>e.id!=id);saveData();renderAll();showToast('تم الحذف')})}
+
+/* ============ MODALS ============ */
+function openCustomModal(title,html){$('modalTitle').textContent=title;$('modalBody').innerHTML=html;$('modalOverlay').classList.add('active')}
+function closeModal(){
+stopFieldScanner();
+stopCamera();
+ $('modalOverlay').classList.remove('active');$('modalBody').innerHTML='';AppData.editing=null}
+function openModal(type,id){
+AppData.editing={type,id};
+const today=todayStr();
+const stageOpts=sel=>AppData.stages.map(s=>`<option value="${s.id}" ${sel==s.id?'selected':''}>${s.name}</option>`).join('');
+const groupOpts=sel=>AppData.groups.map(g=>`<option value="${g.id}" ${sel==g.id?'selected':''}>${g.name}</option>`).join('');
+const studentOpts=sel=>AppData.students.map(s=>`<option value="${s.id}" ${sel==s.id?'selected':''}>${s.name} — ${s.code} (${s.paymentType==='session'?'بالحصة':'شهري'})</option>`).join('');
+let title='',body='';
+if(type==='stage'){const st=id?AppData.stages.find(x=>x.id==id):null;
+title=st?'تعديل المرحلة':'إضافة مرحلة';
+body=`<div class="form-group"><label>اسم المرحلة</label><input id="f_name" value="${st?st.name:''}" placeholder="مثال: الصف الأول الثانوي"></div>
+<div class="form-group"><label>الوصف</label><input id="f_desc" value="${st?st.description||'':''}" placeholder="المواد المتاحة"></div>`}
+if(type==='group'){const g=id?AppData.groups.find(x=>x.id==id):null;
+title=g?'تعديل المجموعة':'إضافة مجموعة';
+body=`<div class="form-group"><label>اسم المجموعة</label><input id="f_name" value="${g?g.name:''}" placeholder="مجموعة A - رياضيات"></div>
+<div class="form-row">
+<div class="form-group"><label>المرحلة</label><select id="f_stage">${stageOpts(g?g.stageId:null)}</select></div>
+<div class="form-group"><label>المعلم</label><input id="f_teacher" value="${g?g.teacher:'مستر علاء'}"></div></div>
+<div class="form-row">
+<div class="form-group"><label>السعة (عدد الطلاب)</label><input type="number" id="f_capacity" value="${g?g.capacity:20}"></div>
+<div class="form-group"><label>الرسوم الشهرية (ج.م)</label><input type="number" id="f_price" value="${g?g.price:AppData.settings.subscriptionFee}"></div></div>
+<div class="form-row">
+<div class="form-group"><label>أيام الحصص</label><input id="f_days" value="${g?g.days:'السبت + الثلاثاء'}"></div>
+<div class="form-group"><label>الوقت</label><input id="f_time" value="${g?g.time:'4:00 - 6:00 م'}"></div></div>`}
+if(type==='student'){const s=id?studentById(id):null;
+title=s?'تعديل بيانات الطالب':'تسجيل طالب جديد';
+body=`<div class="form-group"><label>الاسم بالكامل</label><input id="f_name" value="${s?s.name:''}"></div>
+<div class="form-row">
+<div class="form-group"><label>هاتف الطالب</label><input id="f_phone" dir="ltr" value="${s?s.phone:''}" placeholder="01xxxxxxxxx"></div>
+<div class="form-group"><label>هاتف ولي الأمر</label><input id="f_parent" dir="ltr" value="${s?s.parentPhone||'':''}" placeholder="01xxxxxxxxx"></div></div>
+<div class="form-row">
+<div class="form-group"><label>المجموعة</label><select id="f_group">${groupOpts(s?s.groupId:null)}</select></div>
+<div class="form-group"><label>نظام الدفع</label><select id="f_paytype">
+<option value="monthly" ${s&&s.paymentType==='monthly'?'selected':''}>اشتراك شهري 💳</option>
+<option value="session" ${s&&s.paymentType==='session'?'selected':''}>دفع بالحصة 🎫</option></select></div></div>
+<div class="form-row">
+<div class="form-group"><label>الحالة</label><select id="f_status">
+<option value="active" ${s&&s.status==='active'?'selected':''}>نشط</option>
+<option value="suspended" ${s&&s.status==='suspended'?'selected':''}>موقوف</option></select></div>
+<div class="form-group"><label>العنوان</label><input id="f_address" value="${s?s.address||'':''}"></div></div>
+<div class="form-group">
+<label><i class="fas fa-barcode"></i> كود الطالب (باركود)</label>
+<div class="code-field-wrap">
+<input id="f_code" placeholder="اتركه فارغاً = توليد تلقائي (AL001)" value="${s?s.code:''}">
+<button type="button" class="btn btn-accent" style="flex:none" onclick="scanIntoField('f_code')"><i class="fas fa-camera"></i> مسح الكارت</button>
+</div>
+<small class="code-hint"><i class="fas fa-lightbulb"></i> عندك طالب بكارت جاهز؟ ضع المؤشر في الخانة ثم <b>امسح الكارت بالماسح</b> مباشرة — أو اضغط "مسح الكارت" للكاميرا — ولو فاضية يتولد كود تلقائي عند الحفظ</small>
+</div>`}
+if(type==='book'){const b=id?AppData.books.find(x=>x.id==id):null;
+title=b?'تعديل الملزمة':'إضافة ملزمة';
+body=`<div class="form-group"><label>اسم الملزمة</label><input id="f_title" value="${b?b.title:''}" placeholder="ملزمة الرياضيات - الترم الأول"></div>
+<div class="form-row">
+<div class="form-group"><label>المرحلة</label><select id="f_stage">${stageOpts(b?b.stageId:null)}</select></div>
+<div class="form-group"><label>السعر (ج.م)</label><input type="number" id="f_price" value="${b?b.price:150}"></div></div>
+<div class="form-row">
+<div class="form-group"><label>الكمية بالمخزن</label><input type="number" id="f_stock" value="${b?b.stock:30}"></div>
+<div class="form-group"><label>المؤلف</label><input id="f_author" value="${b?b.author||'':'مستر علاء الحفنى'}"></div></div>`}
+if(type==='sale'){const b=AppData.books.find(x=>x.id==id);
+title='بيع: '+b.title;
+body=`<div class="form-group"><label>الطالب</label><select id="f_student">${studentOpts()}</select></div>
+<div class="form-row">
+<div class="form-group"><label>الكمية (متوفر ${b.stock})</label><input type="number" id="f_qty" value="1" min="1"></div>
+<div class="form-group"><label>الإجمالي</label><input disabled value="${money(b.price)}"></div></div>
+<p class="f-hint"><i class="fas fa-cart-plus"></i> سيتم خصم الكمية من المخزن وتسجيل قيمة البيع تلقائياً في الخزينة</p>`}
+if(type==='payment'){
+title='تسجيل دفعة في الخزينة';
+body=`<div class="form-group"><label>الطالب</label><select id="f_student" onchange="updatePaySuggest()">${studentOpts()}</select></div>
+<div class="form-row">
+<div class="form-group"><label>نوع الدفعة</label><select id="f_type" onchange="updatePaySuggest()">
+<option value="subscription">اشتراك شهري 💳</option>
+<option value="session">دفع حصص 🎫</option>
+<option value="book">ثمن ملزمة 📚</option></select></div>
+<div class="form-group"><label>المبلغ (ج.م)</label><input type="number" id="f_amount"></div></div>
+<div class="form-row">
+<div class="form-group"><label>التاريخ</label><input type="date" id="f_date" value="${today}"></div>
+<div class="form-group"><label>طريقة الدفع</label><select id="f_method"><option>نقدي</option><option>فودافون كاش</option><option>انستا باي</option><option>تحويل بنكي</option></select></div></div>
+<div class="form-group"><label>ملاحظات</label><input id="f_notes" placeholder="دفعة أولى / ثانية..."></div>`}
+if(type==='expense'){
+title='تسجيل مصروف في الخزينة';
+body=`<div class="form-group"><label>بيان المصروف</label><input id="f_title" placeholder="إيجار / كهرباء / مشتريات..."></div>
+<div class="form-row">
+<div class="form-group"><label>المبلغ (ج.م)</label><input type="number" id="f_amount"></div>
+<div class="form-group"><label>التاريخ</label><input type="date" id="f_date" value="${today}"></div></div>
+<div class="form-group"><label>التصنيف</label><select id="f_cat"><option>إيجار</option><option>مرتبات</option><option>كهرباء ومياه</option><option>مشتريات ملازم</option><option>صيانة</option><option>أخرى</option></select></div>`}
+body+=`<div class="modal-actions">
+<button class="btn btn-primary" onclick="saveModal()"><i class="fas fa-save"></i> حفظ</button>
+<button class="btn btn-outline" onclick="closeModal()">إلغاء</button></div>`;
+openCustomModal(title,body);
+if(type==='payment')updatePaySuggest()}
+function updatePaySuggest(){
+const sEl=$('f_student');if(!sEl||!sEl.value)return;
+const s=studentById(+sEl.value);if(!s)return;
+const t=($('f_type')||{value:'subscription'}).value;
+const g=AppData.groups.find(x=>x.id==s.groupId);
+ $('f_amount').value=t==='session'?AppData.settings.sessionFee:(t==='book'?150:(g?g.price:AppData.settings.subscriptionFee))}
+function saveModal(){
+const ed=AppData.editing;if(!ed)return;
+const val=id=>{const el=$(id);return el?el.value.trim():''};
+const num=id=>{const el=$(id);return el?Number(el.value)||0:0};
+const{type,id}=ed;
+if(type==='stage'){const name=val('f_name');if(!name)return showToast('أدخل اسم المرحلة','error');
+if(id){const st=AppData.stages.find(x=>x.id==id);st.name=name;st.description=val('f_desc')}
+else AppData.stages.push({id:AppData.nextId++,name,description:val('f_desc')});showToast('تم حفظ المرحلة ✅')}
+if(type==='group'){const name=val('f_name');if(!name)return showToast('أدخل اسم المجموعة','error');
+const data={name,stageId:+val('f_stage'),teacher:val('f_teacher')||'مستر علاء',capacity:num('f_capacity')||20,price:num('f_price'),days:val('f_days'),time:val('f_time')};
+if(id)Object.assign(AppData.groups.find(x=>x.id==id),data);
+else AppData.groups.push({id:AppData.nextId++,...data});showToast('تم حفظ المجموعة ✅')}
+if(type==='student'){
+const name=val('f_name');if(!name)return showToast('أدخل اسم الطالب','error');
+let code=val('f_code').toUpperCase().replace(/[^A-Z0-9\-]/g,'');
+if(code){
+const dup=AppData.students.find(x=>(!id||x.id!=id)&&x.code.toUpperCase()===code);
+if(dup)return showToast('❌ الكود '+code+' مستخدم بالفعل للطالب: '+dup.name,'error')}
+const data={name,phone:val('f_phone'),parentPhone:val('f_parent'),groupId:+val('f_group'),paymentType:val('f_paytype')||'monthly',status:val('f_status'),address:val('f_address')};
+if(id){
+const st=studentById(id);
+if(code)st.code=code;
+Object.assign(st,data);
+showToast('تم تحديث بيانات الطالب ✅')}
+else{
+if(!code){
+do{code='AL'+String(AppData.nextStudentCode).padStart(3,'0');AppData.nextStudentCode++}
+while(AppData.students.some(x=>x.code===code))}
+const ns={id:AppData.nextId++,code,joinDate:todayStr(),...data};
+AppData.students.unshift(ns);showToast(`تم تسجيل الطالب بكود ${code} ✅`);
+closeModal();saveData();renderAll();printStudentCard(ns.id);return}}
+if(type==='book'){const title=val('f_title');if(!title)return showToast('أدخل اسم الملزمة','error');
+const data={title,stageId:+val('f_stage'),price:num('f_price'),stock:num('f_stock'),author:val('f_author')||'مستر علاء الحفنى'};
+if(id)Object.assign(AppData.books.find(x=>x.id==id),data);
+else AppData.books.push({id:AppData.nextId++,...data});showToast('تم حفظ الملزمة ✅')}
+if(type==='payment'){const sid=+val('f_student'),amount=num('f_amount');
+if(!sid||!amount)return showToast('اختر الطالب وأدخل المبلغ','error');
+AppData.payments.unshift({id:AppData.nextId++,studentId:sid,amount,date:val('f_date')||todayStr(),method:val('f_method'),notes:val('f_notes'),type:val('f_type')||'subscription'});showToast('تم تسجيل الدفعة في الخزينة 💰')}
+if(type==='expense'){const title=val('f_title'),amount=num('f_amount');
+if(!title||!amount)return showToast('أدخل بيان ومبلغ المصروف','error');
+AppData.expenses.unshift({id:AppData.nextId++,title,amount,date:val('f_date')||todayStr(),category:val('f_cat')});showToast('تم تسجيل المصروف 🧾')}
+if(type==='sale'){const b=AppData.books.find(x=>x.id==id),sid=+val('f_student'),qty=Math.max(1,num('f_qty'));
+if(!b||!sid)return showToast('اختر الطالب','error');
+if(qty>b.stock)return showToast('الكمية المتوفرة: '+b.stock,'error');
+b.stock-=qty;
+AppData.bookSales.push({id:AppData.nextId++,bookId:b.id,studentId:sid,qty,date:todayStr(),unitPrice:b.price});
+AppData.payments.unshift({id:AppData.nextId++,studentId:sid,amount:b.price*qty,date:todayStr(),method:'نقدي',notes:'بيع ملزمة: '+b.title+(qty>1?' ×'+qty:''),type:'book'});showToast('تمت عملية البيع 🛒')}
+saveData();renderAll();closeModal()}
+
+/* ============ DELETE ============ */
+function deleteItem(type,id){
+const labels={stage:'المرحلة',group:'المجموعة',student:'الطالب',book:'الملزمة',payment:'الدفعة'};
+let extra='';
+if(type==='stage')extra=' (سيتم حذف مجموعاتها وطلابها وسجلاتهم)';
+if(type==='group')extra=' (سيتم حذف طلابها وسجلاتهم)';
+confirmAction(`هل أنت متأكد من حذف ${labels[type]}${extra}؟`,()=>{
+if(type==='stage'){const gids=AppData.groups.filter(g=>g.stageId==id).map(g=>g.id);
+const sids=AppData.students.filter(s=>gids.includes(s.groupId)).map(s=>s.id);
+AppData.groups=AppData.groups.filter(g=>g.stageId!=id);
+AppData.students=AppData.students.filter(s=>!gids.includes(s.groupId));
+AppData.attendance=AppData.attendance.filter(a=>!sids.includes(a.studentId));
+AppData.payments=AppData.payments.filter(p=>!sids.includes(p.studentId));
+AppData.stages=AppData.stages.filter(s=>s.id!=id)}
+if(type==='group'){const sids=AppData.students.filter(s=>s.groupId==id).map(s=>s.id);
+AppData.students=AppData.students.filter(s=>s.groupId!=id);
+AppData.attendance=AppData.attendance.filter(a=>!sids.includes(a.studentId));
+AppData.payments=AppData.payments.filter(p=>!sids.includes(p.studentId));
+AppData.groups=AppData.groups.filter(g=>g.id!=id)}
+if(type==='student'){AppData.attendance=AppData.attendance.filter(a=>a.studentId!=id);
+AppData.payments=AppData.payments.filter(p=>p.studentId!=id);
+AppData.students=AppData.students.filter(s=>s.id!=id)}
+if(type==='book')AppData.books=AppData.books.filter(b=>b.id!=id);
+if(type==='payment')AppData.payments=AppData.payments.filter(p=>p.id!=id);
+saveData();renderAll();showToast('تم الحذف 🗑️')})}
+
+/* ============ REPORTS ============ */
+let _lastReportHtml='';
+function rpHeader(title,sub){return`<div class="pr-head"><h1>${AppData.settings.centerName}</h1><p>${title}${sub?' — '+sub:''} | تاريخ الطباعة: ${new Date().toLocaleDateString('ar-EG')}</p></div>`}
+function showReportModal(title,innerHtml,printHtml){
+_lastReportHtml=printHtml||innerHtml;
+openCustomModal(title,innerHtml+`<div class="modal-actions"><button class="btn btn-primary" onclick="printLastReport()"><i class="fas fa-print"></i> طباعة التقرير</button></div>`)}
+function printLastReport(){printReport(_lastReportHtml)}
+function studentReport(id){
+const s=studentById(id);if(!s)return;
+const r=attRate(id),paid=studentPaid(id),bal=studentBalance(s);
+const pays=AppData.payments.filter(p=>p.studentId==id).sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+const inner=`
+<div class="rp-grid">
+<div><b>${r.rate}%</b><span>نسبة الحضور</span></div>
+<div><b>${r.present}</b><span>حضور</span></div>
+<div><b>${r.absent}</b><span>غياب</span></div>
+<div><b>${fmt(paid)}</b><span>المدفوع (ج.م)</span></div>
+<div><b class="${bal>0?'t-red':'t-green'}">${fmt(Math.abs(bal))}</b><span>${bal>0?'متبقي (ج.م)':'مُسدد بالكامل ✓'}</span></div></div>
+<h4 style="color:var(--accent-light);margin-bottom:12px"><i class="fas fa-receipt"></i> سجل الدفعات (${pays.length})</h4>
+<table><thead><tr><th>النوع</th><th>المبلغ</th><th>التاريخ</th><th>الطريقة</th><th>ملاحظات</th></tr></thead>
+<tbody>${pays.map(p=>{const[cls,txt]=payTypeBadges[p.type]||['pt-sub','دفع'];
+return`<tr><td><span class="status-badge ${cls}">${txt}</span></td><td class="t-gold"><b>${money(p.amount)}</b></td><td>${fmtDate(p.date)}</td><td>${p.method}</td><td style="font-size:12px">${p.notes||'—'}</td></tr>`}).join('')||'<tr><td colspan="5" class="empty">لا دفعات</td></tr>'}</tbody></table>`;
+const printable=rpHeader('تقرير طالب: '+s.name)+`
+<p>الكود: ${s.code} | المجموعة: ${groupName(s.groupId)} | نظام الدفع: ${s.paymentType==='session'?'بالحصة':'شهري'} | هاتف: ${s.phone}</p>
+<p>الحضور: ${r.rate}% (${r.present} حضور / ${r.absent} غياب) | المدفوع: ${money(paid)} | المتبقي: ${money(Math.max(0,bal))}</p>
+<table class="pt"><tr><th>النوع</th><th>المبلغ</th><th>التاريخ</th><th>الطريقة</th></tr>
+ ${pays.map(p=>`<tr><td>${(payTypeBadges[p.type]||[])[1]||'دفع'}</td><td>${money(p.amount)}</td><td>${p.date}</td><td>${p.method||'—'}</td></tr>`).join('')||'<tr><td colspan="4">لا دفعات</td></tr>'}</table>`;
+showReportModal('تقرير الطالب — '+s.name,inner,printable)}
+function showGroupReport(id){
+const g=AppData.groups.find(x=>x.id==id);if(!g)return;
+const sts=groupStudents(id);
+const rev=AppData.payments.filter(p=>sts.some(s=>s.id==p.studentId)).reduce((a,p)=>a+Number(p.amount),0);
+const avg=sts.length?Math.round(sts.reduce((a,s)=>a+attRate(s.id).rate,0)/sts.length):0;
+const sessions=[...new Set(AppData.attendance.filter(a=>sts.some(s=>s.id==a.studentId)).map(a=>a.date))].length;
+const rows=sts.map(s=>{const r=attRate(s.id),bal=studentBalance(s);
+return`<tr><td>${s.name}</td><td class="mono">${s.code}</td><td>${s.paymentType==='session'?'بالحصة':'شهري'}</td><td>${r.rate}%</td><td>${money(studentPaid(s.id))}</td><td class="${bal>0?'t-red':'t-green'}">${money(Math.max(0,bal))}</td></tr>`}).join('');
+const inner=`
+<div class="rp-grid">
+<div><b>${sts.length}</b><span>طالب</span></div>
+<div><b>${sessions}</b><span>حصة معطاة</span></div>
+<div><b>${avg}%</b><span>متوسط الحضور</span></div>
+<div><b>${fmt(rev)}</b><span>الإيرادات (ج.م)</span></div></div>
+<table><thead><tr><th>الطالب</th><th>الكود</th><th>الدفع</th><th>الحضور</th><th>المدفوع</th><th>المتبقي</th></tr></thead>
+<tbody>${rows||'<tr><td colspan="6" class="empty">لا طلاب</td></tr>'}</tbody></table>`;
+const printable=rpHeader('تقرير مجموعة: '+g.name)+`
+<p>${stageName(g.stageId)} | ${g.days} — ${g.time} | المعلم: ${g.teacher} | ${sts.length}/${g.capacity} طالب | حصص معطاة: ${sessions}</p>
+<table class="pt"><tr><th>الطالب</th><th>الكود</th><th>الدفع</th><th>الحضور%</th><th>المدفوع</th><th>المتبقي</th></tr>
+ ${rows}</table>`;
+showReportModal('تقرير المجموعة — '+g.name,inner,printable)}
+function openDailyReport(){
+const d=($('dailyDate')&&$('dailyDate').value)||todayStr();
+const pays=AppData.payments.filter(p=>p.date===d);
+const exps=AppData.expenses.filter(e=>e.date===d);
+const att=AppData.attendance.filter(a=>a.date===d);
+const bks=AppData.bookings.filter(b=>b.date===d);
+const inc=pays.reduce((a,p)=>a+Number(p.amount),0);
+const exp=exps.reduce((a,e)=>a+Number(e.amount),0);
+const inner=`
+<div class="rp-grid">
+<div><b style="color:#34d399">${fmt(inc)}</b><span>الوارد (ج.م)</span></div>
+<div><b style="color:#f87171">${fmt(exp)}</b><span>المصروف (ج.م)</span></div>
+<div><b>${fmt(inc-exp)}</b><span>صافي اليوم (ج.م)</span></div>
+<div><b>${att.filter(a=>a.status==='present').length}</b><span>حضور</span></div>
+<div><b>${att.filter(a=>a.status==='absent').length}</b><span>غياب</span></div>
+<div><b>${bks.length}</b><span>طلبات حجز</span></div></div>
+<h4 style="color:var(--accent-light);margin-bottom:10px"><i class="fas fa-coins"></i> دخل اليوم</h4>
+<table><thead><tr><th>الطالب</th><th>النوع</th><th>المبلغ</th><th>الطريقة</th></tr></thead>
+<tbody>${pays.map(p=>{const s=studentById(p.studentId);return`<tr><td>${s?s.name:'—'}</td><td>${(payTypeBadges[p.type]||[])[1]}</td><td class="t-gold">${money(p.amount)}</td><td>${p.method}</td></tr>`}).join('')||'<tr><td colspan="4" class="empty">لا دخل اليوم</td></tr>'}</tbody></table>
+ ${exps.length?`<h4 style="color:var(--accent-light);margin:16px 0 10px"><i class="fas fa-receipt"></i> مصروفات اليوم</h4>
+<table><thead><tr><th>البيان</th><th>التصنيف</th><th>المبلغ</th></tr></thead>
+<tbody>${exps.map(e=>`<tr><td>${e.title}</td><td>${e.category}</td><td class="t-red">${money(e.amount)}</td></tr>`).join('')}</tbody></table>`:''}`;
+const printable=rpHeader('التقرير اليومي',fmtDate(d))+`
+<table class="pt"><tr><th>البند</th><th>القيمة</th></tr>
+<tr><td>الوارد</td><td>${money(inc)}</td></tr><tr><td>المصروف</td><td>${money(exp)}</td></tr><tr><td>الصافي</td><td>${money(inc-exp)}</td></tr>
+<tr><td>الحضور</td><td>${att.filter(a=>a.status==='present').length}</td></tr><tr><td>الغياب</td><td>${att.filter(a=>a.status==='absent').length}</td></tr><tr><td>طلبات حجز</td><td>${bks.length}</td></tr></table>
+<h3>تفاصيل الدخل</h3><table class="pt"><tr><th>الطالب</th><th>النوع</th><th>المبلغ</th></tr>
+ ${pays.map(p=>`<tr><td>${(studentById(p.studentId)||{}).name||'—'}</td><td>${(payTypeBadges[p.type]||[])[1]}</td><td>${money(p.amount)}</td></tr>`).join('')||'<tr><td colspan="3">لا دخل</td></tr>'}</table>`;
+showReportModal('التقرير اليومي — '+fmtDate(d),inner,printable)}
+function openMonthlyReport(){
+const m=($('monthPick')&&$('monthPick').value)||monthKey();
+const pays=AppData.payments.filter(p=>(p.date||'').slice(0,7)===m);
+const exps=AppData.expenses.filter(e=>(e.date||'').slice(0,7)===m);
+const att=AppData.attendance.filter(a=>(a.date||'').slice(0,7)===m);
+const inc=pays.reduce((a,p)=>a+Number(p.amount),0);
+const exp=exps.reduce((a,e)=>a+Number(e.amount),0);
+const byType={};pays.forEach(p=>byType[p.type]=(byType[p.type]||0)+Number(p.amount));
+const monthName=new Date(m+'-01').toLocaleDateString('ar-EG',{month:'long',year:'numeric'});
+const debtors=AppData.students.map(s=>({s,bal:studentBalance(s)})).filter(x=>x.bal>0).sort((a,b)=>b.bal-a.bal);
+const inner=`
+<div class="rp-grid">
+<div><b style="color:#34d399">${fmt(inc)}</b><span>الوارد (ج.م)</span></div>
+<div><b style="color:#f87171">${fmt(exp)}</b><span>المصروف (ج.م)</span></div>
+<div><b>${fmt(inc-exp)}</b><span>الصافي (ج.م)</span></div>
+<div><b>${att.filter(a=>a.status==='present').length}</b><span>إجمالي الحضور</span></div>
+<div><b>${[...new Set(att.map(a=>a.date))].length}</b><span>أيام حصص</span></div></div>
+<h4 style="color:var(--accent-light);margin-bottom:10px"><i class="fas fa-chart-pie"></i> الوارد حسب النوع</h4>
+ ${Object.keys(byType).map(k=>{const names={subscription:'اشتراكات شهرية',session:'دفع حصص',book:'مبيعات ملازم'};
+return`<div class="rev-row"><span class="rev-name">${names[k]}</span><div class="progress"><div class="progress-fill" style="width:${Math.round(byType[k]/Math.max(inc,1)*100)}%"></div></div><b class="rev-val">${money(byType[k])}</b></div>`}).join('')||'<p class="empty">لا وارد هذا الشهر</p>'}
+<h4 style="color:var(--accent-light);margin:16px 0 10px"><i class="fas fa-clock-rotate-left"></i> متأخرو السداد (الكل)</h4>
+ ${debtors.slice(0,8).map(d=>`<div class="debt-row"><span>${d.s.name}</span><span class="mono" style="flex:none;color:rgba(255,255,255,.4)">${d.s.code}</span><b class="t-red">${money(d.bal)}</b></div>`).join('')||'<p class="empty">🎉 لا يوجد متأخرون</p>'}`;
+const printable=rpHeader('التقرير الشهري',monthName)+`
+<table class="pt"><tr><th>البند</th><th>القيمة</th></tr>
+<tr><td>الوارد</td><td>${money(inc)}</td></tr><tr><td>المصروف</td><td>${money(exp)}</td></tr><tr><td>الصافي</td><td>${money(inc-exp)}</td></tr>
+<tr><td>حضور الشهر</td><td>${att.filter(a=>a.status==='present').length}</td></tr></table>
+<h3>متأخرو السداد</h3><table class="pt"><tr><th>الطالب</th><th>المجموعة</th><th>المتبقي</th></tr>
+ ${debtors.map(d=>`<tr><td>${d.s.name}</td><td>${groupName(d.s.groupId)}</td><td>${money(d.bal)}</td></tr>`).join('')||'<tr><td colspan="3">لا يوجد</td></tr>'}</table>`;
+showReportModal('التقرير الشهري — '+monthName,inner,printable)}
+function openYearlyReport(){
+const y=($('yearPick')&&$('yearPick').value)||new Date().getFullYear();
+let rows='',totInc=0,totExp=0;
+for(let m=1;m<=12;m++){
+const key=y+'-'+String(m).padStart(2,'0');
+const inc=AppData.payments.filter(p=>(p.date||'').slice(0,7)===key).reduce((a,p)=>a+Number(p.amount),0);
+const exp=AppData.expenses.filter(e=>(e.date||'').slice(0,7)===key).reduce((a,e)=>a+Number(e.amount),0);
+totInc+=inc;totExp+=exp;
+rows+=`<tr><td>${new Date(key+'-01').toLocaleDateString('ar-EG',{month:'long'})}</td><td class="t-green">${money(inc)}</td><td class="t-red">${money(exp)}</td><td><b>${money(inc-exp)}</b></td></tr>`}
+const inner=`
+<div class="rp-grid">
+<div><b style="color:#34d399">${fmt(totInc)}</b><span>إجمالي الوارد (ج.م)</span></div>
+<div><b style="color:#f87171">${fmt(totExp)}</b><span>إجمالي المصروف (ج.م)</span></div>
+<div><b>${fmt(totInc-totExp)}</b><span>صافي السنة (ج.م)</span></div></div>
+<table><thead><tr><th>الشهر</th><th>الوارد</th><th>المصروف</th><th>الصافي</th></tr></thead><tbody>${rows}</tbody></table>`;
+const printable=rpHeader('التقرير السنوي',y)+`<table class="pt"><tr><th>الشهر</th><th>الوارد</th><th>المصروف</th><th>الصافي</th></tr>${rows}</table>`;
+showReportModal('التقرير السنوي — '+y,inner,printable)}
+function openSessionsReport(){
+let groupRows='',totSessions=0;
+AppData.groups.forEach(g=>{
+const sts=groupStudents(g.id).map(s=>s.id);
+const dates=[...new Set(AppData.attendance.filter(a=>sts.includes(a.studentId)).map(a=>a.date))];
+const present=AppData.attendance.filter(a=>sts.includes(a.studentId)&&a.status==='present').length;
+totSessions+=dates.length;
+groupRows+=`<tr><td>${g.name}</td><td>${stageName(g.stageId)}</td><td>${sts.length}</td><td>${dates.length}</td><td>${present}</td><td>${dates.length?Math.round(present/dates.length):0}</td></tr>`});
+let stuRows='';
+AppData.students.forEach(s=>{
+const r=attRate(s.id);
+const sesPaid=AppData.payments.filter(p=>p.studentId==s.id&&p.type==='session').reduce((a,p)=>a+Number(p.amount),0);
+stuRows+=`<tr><td>${s.name}</td><td class="mono">${s.code}</td><td>${s.paymentType==='session'?'بالحصة':'شهري'}</td><td>${r.present}</td><td>${r.absent}</td><td>${money(sesPaid)}</td></tr>`});
+const inner=`
+<div class="rp-grid">
+<div><b>${totSessions}</b><span>إجمالي الحصص المعطاة</span></div>
+<div><b>${AppData.attendance.filter(a=>a.status==='present').length}</b><span>إجمالي مرات الحضور</span></div>
+<div><b>${AppData.attendance.filter(a=>a.status==='absent').length}</b><span>إجمالي الغياب</span></div></div>
+<h4 style="color:var(--accent-light);margin-bottom:10px"><i class="fas fa-users"></i> الحصص حسب المجموعة</h4>
+<table><thead><tr><th>المجموعة</th><th>المرحلة</th><th>الطلاب</th><th>حصص معطاة</th><th>إجمالي حضور</th><th>متوسط/حصة</th></tr></thead>
+<tbody>${groupRows||'<tr><td colspan="6" class="empty">لا بيانات</td></tr>'}</tbody></table>
+<h4 style="color:var(--accent-light);margin:16px 0 10px"><i class="fas fa-user-graduate"></i> تفصيل الطلاب</h4>
+<div style="max-height:300px;overflow-y:auto">
+<table><thead><tr><th>الطالب</th><th>الكود</th><th>الدفع</th><th>حضور</th><th>غياب</th><th>دفع حصص</th></tr></thead>
+<tbody>${stuRows||'<tr><td colspan="6" class="empty">لا بيانات</td></tr>'}</tbody></table></div>`;
+const printable=rpHeader('جرد الحصص')+`
+<table class="pt"><tr><th>المجموعة</th><th>المرحلة</th><th>الطلاب</th><th>حصص معطاة</th><th>إجمالي حضور</th><th>متوسط/حصة</th></tr>${groupRows}</table>
+<h3>تفصيل الطلاب</h3><table class="pt"><tr><th>الطالب</th><th>الكود</th><th>الدفع</th><th>حضور</th><th>غياب</th><th>دفع حصص</th></tr>${stuRows}</table>`;
+showReportModal('جرد الحصص',inner,printable)}
+function openBooksReport(){
+let rows='',totStock=0,totSold=0,totRev=0,totVal=0;
+AppData.books.forEach(b=>{
+const sold=AppData.bookSales.filter(s=>s.bookId==b.id).reduce((a,s)=>a+s.qty,0);
+const rev=AppData.bookSales.filter(s=>s.bookId==b.id).reduce((a,s)=>a+s.qty*s.unitPrice,0);
+totStock+=b.stock;totSold+=sold;totRev+=rev;totVal+=b.stock*b.price;
+rows+=`<tr><td>${b.title}</td><td>${stageName(b.stageId)}</td><td>${money(b.price)}</td><td>${b.stock}</td><td>${sold}</td><td class="t-gold">${money(rev)}</td><td>${money(b.stock*b.price)}</td></tr>`});
+const inner=`
+<div class="rp-grid">
+<div><b>${AppData.books.length}</b><span>عدد الملازم</span></div>
+<div><b>${totStock}</b><span>نسخ بالمخزن</span></div>
+<div><b>${totSold}</b><span>نسخ مباعة</span></div>
+<div><b>${fmt(totRev)}</b><span>إيرادات المبيعات (ج.م)</span></div>
+<div><b>${fmt(totVal)}</b><span>قيمة المخزون (ج.م)</span></div></div>
+<table><thead><tr><th>الملزمة</th><th>المرحلة</th><th>السعر</th><th>المخزن</th><th>المبيعات</th><th>إيرادها</th><th>قيمة المتبقي</th></tr></thead>
+<tbody>${rows||'<tr><td colspan="7" class="empty">لا ملازم</td></tr>'}</tbody></table>`;
+const printable=rpHeader('جرد الملازم')+`<table class="pt"><tr><th>الملزمة</th><th>المرحلة</th><th>السعر</th><th>المخزن</th><th>مباع</th><th>إيرادها</th><th>قيمة المتبقي</th></tr>${rows}
+<tr><td><b>الإجمالي</b></td><td>—</td><td>—</td><td><b>${totStock}</b></td><td><b>${totSold}</b></td><td><b>${money(totRev)}</b></td><td><b>${money(totVal)}</b></td></tr></table>`;
+showReportModal('جرد الملازم',inner,printable)}
+function openFullInventory(){
+const debtors=AppData.students.map(s=>({s,bal:studentBalance(s)})).filter(x=>x.bal>0).sort((a,b)=>b.bal-a.bal);
+const totDebt=debtors.reduce((a,d)=>a+d.bal,0);
+const sold=AppData.bookSales.reduce((a,s)=>a+s.qty,0);
+const bkVal=AppData.books.reduce((a,b)=>a+b.stock*b.price,0);
+const grpRows=AppData.groups.map(g=>{const sts=groupStudents(g.id);
+return`<tr><td>${g.name}</td><td>${stageName(g.stageId)}</td><td>${sts.length}/${g.capacity}</td><td>${sts.filter(s=>s.paymentType==='session').length}</td><td>${money(g.price)}</td></tr>`}).join('');
+const inner=`
+<div class="rp-grid">
+<div><b>${AppData.stages.length}</b><span>مراحل</span></div>
+<div><b>${AppData.groups.length}</b><span>مجموعات</span></div>
+<div><b>${AppData.students.length}</b><span>طلاب</span></div>
+<div><b>${AppData.students.filter(s=>s.paymentType==='session').length}</b><span>طلاب بالحصة</span></div></div>
+<div class="rp-grid">
+<div><b style="color:#34d399">${fmt(totalIncome())}</b><span>إجمالي الوارد (ج.م)</span></div>
+<div><b style="color:#f87171">${fmt(totalExp())}</b><span>إجمالي المصروف (ج.م)</span></div>
+<div><b>${fmt(trBalance())}</b><span>رصيد الخزينة (ج.م)</span></div>
+<div><b class="t-red">${fmt(totDebt)}</b><span>ديون الطلاب (ج.م)</span></div></div>
+<div class="rp-grid">
+<div><b>${AppData.books.reduce((a,b)=>a+b.stock,0)}</b><span>نسخ ملازم بالمخزن</span></div>
+<div><b>${sold}</b><span>نسخ مباعة</span></div>
+<div><b>${fmt(bkVal)}</b><span>قيمة المخزون (ج.م)</span></div>
+<div><b>${[...new Set(AppData.attendance.map(a=>a.date))].length}</b><span>حصص معطاة</span></div></div>
+<h4 style="color:var(--accent-light);margin-bottom:10px"><i class="fas fa-users"></i> المجموعات</h4>
+<table><thead><tr><th>المجموعة</th><th>المرحلة</th><th>الطلاب</th><th>بالحصة</th><th>الرسوم</th></tr></thead>
+<tbody>${grpRows||'<tr><td colspan="5" class="empty">لا مجموعات</td></tr>'}</tbody></table>
+<h4 style="color:var(--accent-light);margin:16px 0 10px"><i class="fas fa-clock-rotate-left"></i> متأخرو السداد (${debtors.length})</h4>
+ ${debtors.slice(0,10).map(d=>`<div class="debt-row"><span>${d.s.name}</span><span style="flex:none">${groupName(d.s.groupId)}</span><b class="t-red">${money(d.bal)}</b></div>`).join('')||'<p class="empty">🎉 لا يوجد متأخرون</p>'}`;
+const printable=rpHeader('الجرد الشامل')+`
+<table class="pt"><tr><th>البند</th><th>العدد/القيمة</th></tr>
+<tr><td>المراحل</td><td>${AppData.stages.length}</td></tr><tr><td>المجموعات</td><td>${AppData.groups.length}</td></tr>
+<tr><td>الطلاب (نشط)</td><td>${AppData.students.filter(s=>s.status==='active').length}</td></tr>
+<tr><td>طلاب دفع بالحصة</td><td>${AppData.students.filter(s=>s.paymentType==='session').length}</td></tr>
+<tr><td>إجمالي الوارد</td><td>${money(totalIncome())}</td></tr><tr><td>إجمالي المصروف</td><td>${money(totalExp())}</td></tr>
+<tr><td>رصيد الخزينة</td><td>${money(trBalance())}</td></tr><tr><td>ديون الطلاب</td><td>${money(totDebt)}</td></tr>
+<tr><td>نسخ الملازم بالمخزن</td><td>${AppData.books.reduce((a,b)=>a+b.stock,0)} (قيمة ${money(bkVal)})</td></tr>
+<tr><td>نسخ مباعة</td><td>${sold}</td></tr><tr><td>حصص معطاة</td><td>${[...new Set(AppData.attendance.map(a=>a.date))].length}</td></tr></table>
+<h3>المجموعات</h3><table class="pt"><tr><th>المجموعة</th><th>المرحلة</th><th>الطلاب</th><th>الرسوم</th></tr>${grpRows}</table>
+<h3>متأخرو السداد</h3><table class="pt"><tr><th>الطالب</th><th>المجموعة</th><th>المتبقي</th></tr>
+ ${debtors.map(d=>`<tr><td>${d.s.name}</td><td>${groupName(d.s.groupId)}</td><td>${money(d.bal)}</td></tr>`).join('')||'<tr><td colspan="3">لا يوجد</td></tr>'}</table>`;
+showReportModal('الجرد الشامل',inner,printable)}
+function printFullReport(){openFullInventory()}
+function printPaymentsReport(){
+const recs=filteredPayments();
+const total=recs.reduce((a,p)=>a+Number(p.amount),0);
+let label='الكل';
+if(AppData.payFilterMode==='today')label='اليوم';
+if(AppData.payFilterMode==='yesterday')label='أمس';
+if(AppData.payFilterMode==='week')label='آخر 7 أيام';
+if(AppData.payFilterMode==='month')label='هذا الشهر';
+if(AppData.payFilterMode==='year')label='هذه السنة';
+if(AppData.payFilterMode==='custom')label='من '+($('payFrom').value||'—')+' إلى '+($('payTo').value||'—');
+printReport(rpHeader('تقرير الدفعات',label)+`
+<p>عدد الدفعات: ${recs.length} | الإجمالي: ${money(total)}</p>
+<table class="pt"><tr><th>الطالب</th><th>المجموعة</th><th>النوع</th><th>المبلغ</th><th>التاريخ</th><th>الطريقة</th></tr>
+ ${recs.map(p=>{const s=studentById(p.studentId);return`<tr><td>${s?s.name:'—'}</td><td>${s?groupName(s.groupId):'—'}</td><td>${(payTypeBadges[p.type]||[])[1]}</td><td>${money(p.amount)}</td><td>${p.date}</td><td>${p.method||'—'}</td></tr>`}).join('')||'<tr><td colspan="6">لا نتائج</td></tr>'}</table>`)}
+
+/* ============ CSV / BACKUP ============ */
+function exportCSV(type){
+let rows=[],filename='';
+if(type==='students'){rows.push(['الكود','الاسم','المجموعة','نظام الدفع','الهاتف','هاتف ولي الأمر','الحالة','حضور%','المدفوع','المتبقي']);
+AppData.students.forEach(s=>rows.push([s.code,s.name,groupName(s.groupId),s.paymentType==='session'?'بالحصة':'شهري',s.phone,s.parentPhone||'',s.status==='active'?'نشط':'موقوف',attRate(s.id).rate,studentPaid(s.id),Math.max(0,studentBalance(s))]));filename='students.csv'}
+if(type==='payments'){rows.push(['الطالب','المجموعة','النوع','المبلغ','التاريخ','الطريقة','ملاحظات']);
+AppData.payments.forEach(p=>{const s=studentById(p.studentId);rows.push([s?s.name:'—',s?groupName(s.groupId):'—',(payTypeBadges[p.type]||[])[1],p.amount,p.date,p.method||'',p.notes||''])});filename='payments.csv'}
+const csv='\uFEFF'+rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+const a=document.createElement('a');
+a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+a.download=filename;document.body.appendChild(a);a.click();a.remove();
+showToast('تم تصدير الملف 📄')}
+async function quickBackup(){
+const data=JSON.stringify(AppData,null,2);
+const name='MR-ALAA-Backup-'+todayStr()+'.json';
+if(window.showSaveFilePicker){
+try{
+const handle=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON Backup',accept:{'application/json':['.json']}}]});
+const w=await handle.createWritable();await w.write(data);await w.close();
+AppData.lastBackup=todayStr();saveData();renderSettings();
+showToast('تم حفظ النسخة الاحتياطية في المكان الذي اخترته ✅');return}
+catch(e){
+if(e&&e.name==='AbortError'){showToast('تم إلغاء الحفظ','info');return}}}
+try{
+const a=document.createElement('a');
+a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));
+a.download=name;document.body.appendChild(a);a.click();
+setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);
+AppData.lastBackup=todayStr();saveData();renderSettings();
+openCustomModal('تم إنشاء النسخة الاحتياطية ✅',`
+<div style="text-align:center">
+<div style="font-size:60px;color:#34d399;margin-bottom:10px"><i class="fas fa-circle-check"></i></div>
+<h3 style="margin-bottom:6px">تم تنزيل ملف النسخة الاحتياطية</h3>
+<p class="mono" style="color:var(--accent-light);font-size:16px;font-weight:800;margin-bottom:16px">${name}</p>
+<div class="f-hint" style="text-align:right">
+<i class="fas fa-folder-open"></i> <b>الملف الآن في مجلد "التنزيلات/Downloads"</b><br><br>
+<i class="fas fa-usb" style="color:var(--accent-light)"></i> <b>لنقله للفلاشة:</b><br>
+1️⃣ افتح مجلد التنزيلات من شريط المتصفح أو من "هذا الكمبيوتر"<br>
+2️⃣ اقطع/انسخ الملف<br>
+3️⃣ افتح الفلاشة ${AppData.settings.backupPath?'('+AppData.settings.backupPath+')':''} والصقه فيها</div>
+<div class="modal-actions" style="justify-content:center">
+<button class="btn btn-primary" onclick="closeModal()"><i class="fas fa-check"></i> فهمت، شكراً</button>
+</div></div>`)}
+catch(err){showToast('تعذر إنشاء النسخة: '+(err.message||'خطأ غير معروف'),'error')}}
+function importBackup(input){
+const f=input.files[0];if(!f)return;
+const rd=new FileReader();
+rd.onload=()=>{try{const d=JSON.parse(rd.result);
+if(!d.stages||!d.settings)throw 0;
+AppData=d;saveData();
+if(AppData.currentUser){updateUI()}
+renderAll();closeModal();
+showToast('تم استيراد النسخة الاحتياطية ✅')}
+catch(e){showToast('ملف غير صالح!','error')}};
+rd.readAsText(f)}
+function resetAll(){confirmAction('سيتم مسح كل البيانات واستعادة البيانات التجريبية. متابعة؟',()=>{localStorage.removeItem(STORAGE_KEY);location.reload()})}
+
+/* ============ SETTINGS ============ */
+function renderSettings(){
+const s=AppData.settings;
+ $('centerName').value=s.centerName;$('totalSessions').value=s.totalSessions;
+ $('allowedAbsence').value=s.allowedAbsence;$('subscriptionFee').value=s.subscriptionFee;
+ $('sessionFee').value=s.sessionFee;$('backupPath').value=s.backupPath||'';
+const waEl=$('whatsappNumber');
+if(waEl)waEl.value=s.whatsapp||'';
+const pubEl=$('bookingPublicUrl');
+if(pubEl)pubEl.value=s.bookingPublicUrl||'';
+ $('lastBackupInfo').textContent=AppData.lastBackup?fmtDate(AppData.lastBackup):'لم تُنشأ نسخة بعد'}
+function saveSettings(){
+const waEl=$('whatsappNumber'),pubEl=$('bookingPublicUrl');
+AppData.settings={centerName:$('centerName').value.trim()||'مستر علاء الحفنى',totalSessions:+$('totalSessions').value||8,allowedAbsence:+$('allowedAbsence').value||3,subscriptionFee:+$('subscriptionFee').value||1200,sessionFee:+$('sessionFee').value||150,backupPath:$('backupPath').value.trim(),whatsapp:waEl?(waEl.value||'').replace(/[^0-9]/g,''):(AppData.settings.whatsapp||''),bookingPublicUrl:pubEl?(pubEl.value||'').trim():(AppData.settings.bookingPublicUrl||'')};
+saveData();renderAll();showToast('تم حفظ الإعدادات ✅')}
+
+/* ============ BADGES & INIT ============ */
+function updateBadges(){
+ $('stagesCount').textContent=AppData.stages.length;
+ $('groupsCount').textContent=AppData.groups.length;
+ $('studentsCount').textContent=AppData.students.length;
+const pending=AppData.bookings.filter(b=>b.status==='pending').length;
+ $('bookingBadge').textContent=pending;$('bookingBadge').classList.toggle('hide',!pending);
+ $('bellDot').style.display=pending?'block':'none';
+ $('todayDate').innerHTML='<i class="fas fa-calendar-day"></i> '+new Date().toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
+function renderAll(){renderDashboard();renderStages();renderGroups();renderGroupDetails();renderStudents();renderBooking();renderBooks();renderCodes();populateAttGroups();renderAttList();renderAttendance();renderPayments();renderTreasury();renderSettings();updateBadges()}
+document.addEventListener('DOMContentLoaded',()=>{
+seedDemo();
+ $('dailyDate').value=todayStr();
+ $('monthPick').value=monthKey();
+ $('yearPick').value=new Date().getFullYear();
+ $('attDate').value=todayStr();
+if(AppData.currentUser)updateUI();
+handleHash();
+renderAll();
+markSaved()});
+</script>
+</body>
+</html>
