@@ -965,7 +965,7 @@ textarea{resize:vertical}
 const Users={admin:{name:'علاء الحفنى',password:'admin123',role:'مدير',icon:'ع'},user1:{name:'أحمد محمد',password:'user123',role:'مشرف',icon:'أ'},user2:{name:'سارة علي',password:'user123',role:'معلم',icon:'س'},user3:{name:'خالد حسن',password:'user123',role:'محاسب',icon:'خ'}};
 const STORAGE_KEY='mrAlaaPro_v7';
 const $=id=>document.getElementById(id);
-function defaultData(){return{stages:[],groups:[],students:[],attendance:[],payments:[],expenses:[],books:[],bookSales:[],bookings:[],nextId:100,nextStudentCode:1,bookingToken:'ALAA'+Math.floor(Math.random()*900+100),currentUser:null,editing:null,selectedGroupId:null,selectedPayType:'monthly',payFilterMode:'all',lastBackup:'',seeded:false,settings:{centerName:'مستر علاء الحفنى',totalSessions:8,allowedAbsence:3,subscriptionFee:1200,sessionFee:150,backupPath:'',whatsapp:'',bookingPublicUrl:'',googleScriptUrl:''}}}
+function defaultData(){return{stages:[],groups:[],students:[],attendance:[],payments:[],expenses:[],books:[],bookSales:[],bookings:[],nextId:100,nextStudentCode:1,bookingToken:'ALAA'+Math.floor(Math.random()*900+100),currentUser:null,editing:null,selectedGroupId:null,selectedPayType:'monthly',payFilterMode:'all',lastBackup:'',seeded:false,settings:{centerName:'مستر علاء الحفنى',totalSessions:8,allowedAbsence:3,subscriptionFee:1200,sessionFee:150,backupPath:'',whatsapp:'',bookingPublicUrl:'https://alaaelhefny1964-sys.github.io/poty/',googleScriptUrl:''}}}
 let AppData=(()=>{try{const d=JSON.parse(localStorage.getItem(STORAGE_KEY));if(d&&d.settings)return d}catch(e){}return defaultData()})();
 function markSaved(){const t=new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});const el=$('saveStatus');if(el)el.innerHTML='<i class="fas fa-circle-check"></i> حُفظ تلقائياً '+t}
 function saveData(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(AppData));markSaved()}catch(e){}}
@@ -1115,12 +1115,24 @@ const isBooking=location.hash.startsWith('#booking');
 if(isBooking){$('loginPage').style.display='none';$('appContainer').style.display='none';initPublicBooking()}
 else if(AppData.currentUser){$('loginPage').style.display='none';$('appContainer').style.display='block';renderAll()}
 else{$('appContainer').style.display='none';$('publicBookingPage').style.display='none';$('loginPage').style.display='flex'}}
-function getBookingLink(){const pub=(AppData.settings&&AppData.settings.bookingPublicUrl||'').trim();const base=pub?pub.replace(/#.*$/,''):location.href.split('#')[0];return base+'#booking='+AppData.bookingToken}
+function getBookingLink(){const pub=((AppData.settings&&AppData.settings.bookingPublicUrl||'').trim()||'https://alaaelhefny1964-sys.github.io/poty/');const base=pub.replace(/#.*$/,'');return base+'#booking='+AppData.bookingToken}
 function previewBookingPage(){location.hash='booking='+AppData.bookingToken}
 function exitPublicBooking(){if(location.hash)location.hash='';else handleHash()}
 function scrollToPbForm(){const el=$('pbFormSection');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
 
 /* ============ PUBLIC BOOKING ============ */
+// يُملأ برابط الـ Web App من جوجل ليسحب الطالب المراحل والمجموعات الحقيقية ويرسل الطلب للشيت
+const PUBLISHED_SCRIPT_URL='https://script.google.com/macros/s/AKfycbzVpm5D8z3uVCke1epoqFjuuv1pEu_hsripKR1akKOCtKArY8Z0uNTcqeznmLBDFYhu/exec';
+function publishedScriptUrl(){return ((AppData.settings&&AppData.settings.googleScriptUrl||'').trim()||PUBLISHED_SCRIPT_URL||'').trim()}
+async function loadPublishedLists(){
+const url=publishedScriptUrl();
+if(!url||location.protocol==='file:')return false;
+try{
+const r=await fetch(url+'?action=lists');
+const j=await r.json();
+if(j&&j.ok&&(j.stages||[]).length){AppData.stages=j.stages;AppData.groups=j.groups||[];return true}
+}catch(e){}
+return false}
 function initPublicBooking(){
  $('pbPreviewNote').style.display=AppData.currentUser?'flex':'none';
  $('pbStage').innerHTML='<option value="">-- اختر المرحلة --</option>'+AppData.stages.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
@@ -1130,7 +1142,8 @@ document.querySelectorAll('#bookingForm .form-group input').forEach(i=>i.classLi
 AppData.selectedGroupId=null;AppData.selectedPayType='monthly';
 document.querySelectorAll('.paytype').forEach((el,i)=>el.classList.toggle('selected',i===0));
 updateBookingGroups();
-if(AppData.currentUser)$('publicBookingPage').scrollTop=0}
+if(AppData.currentUser)$('publicBookingPage').scrollTop=0;
+loadPublishedLists().then(ok=>{if(ok){$('pbStage').innerHTML='<option value="">-- اختر المرحلة --</option>'+AppData.stages.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');updateBookingGroups()}})}
 function updateBookingGroups(){
 const sid=$('pbStage').value,box=$('pbGroups');
 AppData.selectedGroupId=null;
@@ -2050,32 +2063,32 @@ const s=AppData.settings;
 const waEl=$('whatsappNumber');
 if(waEl)waEl.value=s.whatsapp||'';
 const pubEl=$('bookingPublicUrl');
-if(pubEl)pubEl.value=s.bookingPublicUrl||'';
+if(pubEl)pubEl.value=s.bookingPublicUrl||'https://alaaelhefny1964-sys.github.io/poty/';
 const gsEl=$('googleScriptUrl');
 if(gsEl)gsEl.value=s.googleScriptUrl||'';
 const pubEl2=$('bookingPublicUrl2');
-if(pubEl2)pubEl2.value=s.bookingPublicUrl||'';
+if(pubEl2)pubEl2.value=s.bookingPublicUrl||'https://alaaelhefny1964-sys.github.io/poty/';
 const gsEl2=$('googleScriptUrl2');
 if(gsEl2)gsEl2.value=s.googleScriptUrl||'';
  $('lastBackupInfo').textContent=AppData.lastBackup?fmtDate(AppData.lastBackup):'لم تُنشأ نسخة بعد'}
 function saveSettings(){
 const waEl=$('whatsappNumber'),pubEl=$('bookingPublicUrl'),gsEl=$('googleScriptUrl');
-AppData.settings={centerName:$('centerName').value.trim()||'مستر علاء الحفنى',totalSessions:+$('totalSessions').value||8,allowedAbsence:+$('allowedAbsence').value||3,subscriptionFee:+$('subscriptionFee').value||1200,sessionFee:+$('sessionFee').value||150,backupPath:$('backupPath').value.trim(),whatsapp:waEl?(waEl.value||'').replace(/[^0-9]/g,''):(AppData.settings.whatsapp||''),bookingPublicUrl:pubEl?(pubEl.value||'').trim():(AppData.settings.bookingPublicUrl||''),googleScriptUrl:gsEl?(gsEl.value||'').trim():(AppData.settings.googleScriptUrl||'')};
+AppData.settings={centerName:$('centerName').value.trim()||'مستر علاء الحفنى',totalSessions:+$('totalSessions').value||8,allowedAbsence:+$('allowedAbsence').value||3,subscriptionFee:+$('subscriptionFee').value||1200,sessionFee:+$('sessionFee').value||150,backupPath:$('backupPath').value.trim(),whatsapp:waEl?(waEl.value||'').replace(/[^0-9]/g,''):(AppData.settings.whatsapp||''),bookingPublicUrl:pubEl?((pubEl.value||'').trim()||'https://alaaelhefny1964-sys.github.io/poty/'):(AppData.settings.bookingPublicUrl||'https://alaaelhefny1964-sys.github.io/poty/'),googleScriptUrl:gsEl?(gsEl.value||'').trim():(AppData.settings.googleScriptUrl||'')};
 saveData();renderAll();showToast('تم حفظ الإعدادات ✅')}
 function saveBookingLinks(){
 const pubEl2=$('bookingPublicUrl2'),gsEl2=$('googleScriptUrl2');
-if(pubEl2)AppData.settings.bookingPublicUrl=pubEl2.value.trim();
+if(pubEl2)AppData.settings.bookingPublicUrl=pubEl2.value.trim()||'https://alaaelhefny1964-sys.github.io/poty/';
 if(gsEl2)AppData.settings.googleScriptUrl=gsEl2.value.trim();
 saveData();renderAll();showToast('تم حفظ روابط الحجز ✅')}
 function postBookingToSheet(bk){
 try{
-const url=(AppData.settings&&AppData.settings.googleScriptUrl||'').trim();
+const url=publishedScriptUrl();
 if(!url)return;
 const g=AppData.groups.find(x=>x.id==bk.groupId)||{};
 fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({name:bk.name,phone:bk.phone,parentPhone:bk.parentPhone||'',address:bk.address||'',stageId:bk.stageId,stageName:stageName(bk.stageId),groupId:bk.groupId,groupName:g.name||'',paymentType:bk.paymentType,notes:bk.notes||''})}).catch(()=>{});
 }catch(e){}}
 async function importBookingsFromSheet(){
-const url=(AppData.settings&&AppData.settings.googleScriptUrl||'').trim();
+const url=publishedScriptUrl();
 if(!url)return showToast('الصق رابط سكربت جوجل أولا ثم اضغط حفظ','error');
 showToast('جاري الاستيراد من الشيت...','info');
 try{
