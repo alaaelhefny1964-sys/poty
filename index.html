@@ -673,10 +673,16 @@ textarea{resize:vertical}
 </div>
 <div class="glass-card">
 <div class="card-header"><h4><i class="fas fa-globe"></i> رابط الحجز النشط</h4><span class="status-badge status-active">مفعل</span></div>
+<div class="form-group"><label>الرابط المنشور (من GitHub Pages / Netlify) — الصقه مرة واحدة ويتحفظ</label><input type="text" id="bookingPublicUrl2" dir="ltr" placeholder="مثال: https://username.github.io/alaa-booking/"></div>
+<div class="form-group"><label>رابط سكربت جوجل (Web App URL) — لمزامنة الحجوزات مع الشيت</label><input type="text" id="googleScriptUrl2" dir="ltr" placeholder="https://script.google.com/macros/s/.../exec"></div>
+<div class="modal-actions">
+<button class="btn btn-success" onclick="saveBookingLinks()"><i class="fas fa-save"></i> حفظ الروابط</button>
+<button class="btn btn-info" onclick="importBookingsFromSheet()"><i class="fas fa-download"></i> استيراد حجوزات الشيت</button>
+</div>
 <div class="booking-link-box">
 <div class="qr-sim"><i class="fas fa-qrcode"></i></div>
 <div class="link-text" id="bookingLink"></div>
-<p style="color:rgba(255,255,255,.4);font-size:13px;margin-top:10px"><i class="fas fa-info-circle"></i> الطالب يفتح الرابط، يشوف صفحة هبوط كاملة ويرسل طلبه — يصلك هنا فوراً</p>
+<p style="color:rgba(255,255,255,.4);font-size:13px;margin-top:10px"><i class="fas fa-info-circle"></i> الطالب يفتح الرابط، يشوف نفس صفحة الهبوط الجمالية ويرسل طلبه — يصلك هنا + الشيت</p>
 </div>
 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px">
 <button class="btn btn-primary" onclick="copyBookingLink()"><i class="fas fa-copy"></i> نسخ الرابط</button>
@@ -904,7 +910,8 @@ textarea{resize:vertical}
 <div class="form-group"><label>رسوم الحصة الواحدة (ج.م)</label><input type="number" id="sessionFee"></div>
 </div>
 <div class="form-group"><label><i class="fab fa-whatsapp"></i> رقم واتساب المركز (لاستقبال طلبات الحجز)</label><input type="text" id="whatsappNumber" dir="ltr" placeholder="مثال: 01000000000"></div>
-<div class="form-group"><label><i class="fas fa-globe"></i> رابط الحجز الإلكتروني المنشور (بعد رفع الصفحة على الإنترنت)</label><input type="text" id="bookingPublicUrl" dir="ltr" placeholder="مثال: https://alaa-center.netlify.app"></div>
+<div class="form-group"><label><i class="fas fa-globe"></i> رابط الحجز الإلكتروني المنشور (بعد رفع الصفحة على الإنترنت)</label><input type="text" id="bookingPublicUrl" dir="ltr" placeholder="مثال: https://username.github.io/alaa-booking/"></div>
+<div class="form-group"><label><i class="fas fa-table"></i> رابط سكربت جوجل (Web App URL من Apps Script)</label><input type="text" id="googleScriptUrl" dir="ltr" placeholder="https://script.google.com/macros/s/.../exec"></div>
 </div>
 <div class="glass-card">
 <div class="card-header"><h4><i class="fas fa-database"></i> النسخ الاحتياطي والحفظ التلقائي</h4></div>
@@ -958,7 +965,7 @@ textarea{resize:vertical}
 const Users={admin:{name:'علاء الحفنى',password:'admin123',role:'مدير',icon:'ع'},user1:{name:'أحمد محمد',password:'user123',role:'مشرف',icon:'أ'},user2:{name:'سارة علي',password:'user123',role:'معلم',icon:'س'},user3:{name:'خالد حسن',password:'user123',role:'محاسب',icon:'خ'}};
 const STORAGE_KEY='mrAlaaPro_v7';
 const $=id=>document.getElementById(id);
-function defaultData(){return{stages:[],groups:[],students:[],attendance:[],payments:[],expenses:[],books:[],bookSales:[],bookings:[],nextId:100,nextStudentCode:1,bookingToken:'ALAA'+Math.floor(Math.random()*900+100),currentUser:null,editing:null,selectedGroupId:null,selectedPayType:'monthly',payFilterMode:'all',lastBackup:'',seeded:false,settings:{centerName:'مستر علاء الحفنى',totalSessions:8,allowedAbsence:3,subscriptionFee:1200,sessionFee:150,backupPath:'',whatsapp:'',bookingPublicUrl:''}}}
+function defaultData(){return{stages:[],groups:[],students:[],attendance:[],payments:[],expenses:[],books:[],bookSales:[],bookings:[],nextId:100,nextStudentCode:1,bookingToken:'ALAA'+Math.floor(Math.random()*900+100),currentUser:null,editing:null,selectedGroupId:null,selectedPayType:'monthly',payFilterMode:'all',lastBackup:'',seeded:false,settings:{centerName:'مستر علاء الحفنى',totalSessions:8,allowedAbsence:3,subscriptionFee:1200,sessionFee:150,backupPath:'',whatsapp:'',bookingPublicUrl:'',googleScriptUrl:''}}}
 let AppData=(()=>{try{const d=JSON.parse(localStorage.getItem(STORAGE_KEY));if(d&&d.settings)return d}catch(e){}return defaultData()})();
 function markSaved(){const t=new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});const el=$('saveStatus');if(el)el.innerHTML='<i class="fas fa-circle-check"></i> حُفظ تلقائياً '+t}
 function saveData(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(AppData));markSaved()}catch(e){}}
@@ -1055,7 +1062,7 @@ const user=Users[username];
 if(!user){txt.textContent='❌ المستخدم غير موجود';err.style.display='block';return}
 if(user.password===password){AppData.currentUser={id:username,name:user.name,role:user.role,icon:user.icon};saveData();err.style.display='none';updateUI();$('loginPage').style.display='none';$('appContainer').style.display='block';renderAll();showToast('أهلاً بك، '+user.name+' 👋')}
 else{txt.textContent='❌ كلمة المرور غير صحيحة';err.style.display='block'}}
-function logout(){AppData.currentUser=null;saveData();$('appContainer').style.display='none';$('loginPage').style.display='flex';$('loginPassword').value='';$('loginUser').value='';$('loginError').style.display='none'}
+function logout(){AppData.currentUser=null;saveData();if(location.hash)location.hash='';$('publicBookingPage').style.display='none';$('appContainer').style.display='none';$('loginPage').style.display='flex';$('loginPassword').value='';$('loginUser').value='';$('loginError').style.display='none'}
 function updateUI(){const u=AppData.currentUser;if(!u)return;$('userNameDisplay').textContent=u.name;$('userRoleDisplay').textContent=u.role==='مدير'?'مدير النظام':u.role;$('userAvatar').textContent=u.icon;$('roleBadge').innerHTML=`<i class="fas ${u.role==='مدير'?'fa-crown':'fa-user'}"></i> ${u.role}`;$('currentUserDisplay').textContent=u.name}
 
 /* ============ DEMO DATA ============ */
@@ -1106,7 +1113,8 @@ function handleHash(){
 const isBooking=location.hash.startsWith('#booking');
  $('publicBookingPage').style.display=isBooking?'flex':'none';
 if(isBooking){$('loginPage').style.display='none';$('appContainer').style.display='none';initPublicBooking()}
-else{if(AppData.currentUser){$('appContainer').style.display='block';renderAll()}else $('loginPage').style.display='flex'}}
+else if(AppData.currentUser){$('loginPage').style.display='none';$('appContainer').style.display='block';renderAll()}
+else{$('appContainer').style.display='none';$('publicBookingPage').style.display='none';$('loginPage').style.display='flex'}}
 function getBookingLink(){const pub=(AppData.settings&&AppData.settings.bookingPublicUrl||'').trim();const base=pub?pub.replace(/#.*$/,''):location.href.split('#')[0];return base+'#booking='+AppData.bookingToken}
 function previewBookingPage(){location.hash='booking='+AppData.bookingToken}
 function exitPublicBooking(){if(location.hash)location.hash='';else handleHash()}
@@ -1147,7 +1155,7 @@ if(!ok){showToast('من فضلك أكمل البيانات المطلوبة بش
 if(!$('pbStage').value){showToast('اختر المرحلة الدراسية','error');return}
 if(!AppData.selectedGroupId){showToast('اختر المجموعة المناسبة لك','error');return}
 const bk={id:AppData.nextId++,name:name.value.trim(),phone:phone.value.trim(),parentPhone:$('pbParent').value.trim(),address:$('pbAddress').value.trim(),stageId:+$('pbStage').value,groupId:AppData.selectedGroupId,paymentType:AppData.selectedPayType,notes:$('pbNotes').value.trim(),date:todayStr(),status:'pending'};
-AppData.bookings.unshift(bk);saveData();
+AppData.bookings.unshift(bk);saveData();postBookingToSheet(bk);
 const g=AppData.groups.find(x=>x.id==bk.groupId);
  $('bookingForm').style.display='none';$('bookingSuccess').style.display='block';
  $('reqCode').textContent='REQ-'+bk.id;
@@ -2043,11 +2051,48 @@ const waEl=$('whatsappNumber');
 if(waEl)waEl.value=s.whatsapp||'';
 const pubEl=$('bookingPublicUrl');
 if(pubEl)pubEl.value=s.bookingPublicUrl||'';
+const gsEl=$('googleScriptUrl');
+if(gsEl)gsEl.value=s.googleScriptUrl||'';
+const pubEl2=$('bookingPublicUrl2');
+if(pubEl2)pubEl2.value=s.bookingPublicUrl||'';
+const gsEl2=$('googleScriptUrl2');
+if(gsEl2)gsEl2.value=s.googleScriptUrl||'';
  $('lastBackupInfo').textContent=AppData.lastBackup?fmtDate(AppData.lastBackup):'لم تُنشأ نسخة بعد'}
 function saveSettings(){
-const waEl=$('whatsappNumber'),pubEl=$('bookingPublicUrl');
-AppData.settings={centerName:$('centerName').value.trim()||'مستر علاء الحفنى',totalSessions:+$('totalSessions').value||8,allowedAbsence:+$('allowedAbsence').value||3,subscriptionFee:+$('subscriptionFee').value||1200,sessionFee:+$('sessionFee').value||150,backupPath:$('backupPath').value.trim(),whatsapp:waEl?(waEl.value||'').replace(/[^0-9]/g,''):(AppData.settings.whatsapp||''),bookingPublicUrl:pubEl?(pubEl.value||'').trim():(AppData.settings.bookingPublicUrl||'')};
+const waEl=$('whatsappNumber'),pubEl=$('bookingPublicUrl'),gsEl=$('googleScriptUrl');
+AppData.settings={centerName:$('centerName').value.trim()||'مستر علاء الحفنى',totalSessions:+$('totalSessions').value||8,allowedAbsence:+$('allowedAbsence').value||3,subscriptionFee:+$('subscriptionFee').value||1200,sessionFee:+$('sessionFee').value||150,backupPath:$('backupPath').value.trim(),whatsapp:waEl?(waEl.value||'').replace(/[^0-9]/g,''):(AppData.settings.whatsapp||''),bookingPublicUrl:pubEl?(pubEl.value||'').trim():(AppData.settings.bookingPublicUrl||''),googleScriptUrl:gsEl?(gsEl.value||'').trim():(AppData.settings.googleScriptUrl||'')};
 saveData();renderAll();showToast('تم حفظ الإعدادات ✅')}
+function saveBookingLinks(){
+const pubEl2=$('bookingPublicUrl2'),gsEl2=$('googleScriptUrl2');
+if(pubEl2)AppData.settings.bookingPublicUrl=pubEl2.value.trim();
+if(gsEl2)AppData.settings.googleScriptUrl=gsEl2.value.trim();
+saveData();renderAll();showToast('تم حفظ روابط الحجز ✅')}
+function postBookingToSheet(bk){
+try{
+const url=(AppData.settings&&AppData.settings.googleScriptUrl||'').trim();
+if(!url)return;
+const g=AppData.groups.find(x=>x.id==bk.groupId)||{};
+fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({name:bk.name,phone:bk.phone,parentPhone:bk.parentPhone||'',address:bk.address||'',stageId:bk.stageId,stageName:stageName(bk.stageId),groupId:bk.groupId,groupName:g.name||'',paymentType:bk.paymentType,notes:bk.notes||''})}).catch(()=>{});
+}catch(e){}}
+async function importBookingsFromSheet(){
+const url=(AppData.settings&&AppData.settings.googleScriptUrl||'').trim();
+if(!url)return showToast('الصق رابط سكربت جوجل أولا ثم اضغط حفظ','error');
+showToast('جاري الاستيراد من الشيت...','info');
+try{
+const r=await fetch(url+'?action=bookings');
+const j=await r.json();
+const rows=(j.bookings||[]);
+let added=0;
+rows.forEach(b=>{
+const exists=AppData.bookings.some(x=>String(x.phone)===String(b.phone)&&String(x.name)===String(b.name)&&String(x.date)===String(b.date));
+if(!exists){
+AppData.bookings.unshift({id:AppData.nextId++,name:b.name,phone:b.phone,parentPhone:b.parentPhone||'',address:b.address||'',stageId:+b.stageId||AppData.stages[0]?.id||1,groupId:+b.groupId||AppData.groups[0]?.id||1,paymentType:b.paymentType||'monthly',notes:b.notes||'',date:b.date||todayStr(),status:'pending'});
+added++;
+}
+});
+saveData();renderAll();
+showToast(added?('تم استيراد '+added+' طلب جديد ✅'):'لا طلبات جديدة في الشيت','info');
+}catch(e){showToast('تعذر الاتصال بالشيت - تأكد من النشر Anyone','error')}}
 
 /* ============ BADGES & INIT ============ */
 function updateBadges(){
@@ -2061,11 +2106,11 @@ const pending=AppData.bookings.filter(b=>b.status==='pending').length;
 function renderAll(){renderDashboard();renderStages();renderGroups();renderGroupDetails();renderStudents();renderBooking();renderBooks();renderCodes();populateAttGroups();renderAttList();renderAttendance();renderPayments();renderTreasury();renderSettings();updateBadges()}
 document.addEventListener('DOMContentLoaded',()=>{
 seedDemo();
+AppData.currentUser=null;try{localStorage.setItem(STORAGE_KEY,JSON.stringify(AppData))}catch(e){}
  $('dailyDate').value=todayStr();
  $('monthPick').value=monthKey();
  $('yearPick').value=new Date().getFullYear();
  $('attDate').value=todayStr();
-if(AppData.currentUser)updateUI();
 handleHash();
 renderAll();
 markSaved()});
